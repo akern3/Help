@@ -25,6 +25,10 @@ namespace HelpServer
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //Configuração para que o Web API trabalhe sempre com JSON
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            //config.Formatters.Remove(config.Formatters.JsonFormatter);
         }
     }
 }

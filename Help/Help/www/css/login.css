@@ -1,0 +1,49 @@
+﻿body {
+    margin: 0 auto !important;
+    width: 80%;
+    padding: 0;
+}
+
+.logo {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.row-fluid {
+    margin: 15px 0;
+}
+
+.row-fluid button {
+    width: 130px;
+}
+
+.slogan {
+    text-align: center; 
+    margin-top: 50px !important; 
+    font-size: 17px;
+}
+
+.forgot-password {
+    font-size: 10px;
+    float: right;
+    color: #333 !important;
+    font-weight: normal;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.btn-vermelho {
+    color: white !important;
+    background-color: #FF3030;
+    text-shadow: none !important;
+    width: 130px;
+}
+
+.btn-vermelho:hover {
+    color: white !important;
+    opacity: 0.85;
+    text-shadow: none !important;
+}

@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/professor.css">
+    <link rel="stylesheet" type="text/css" href="../css/padroes.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script type="text/javascript" src="../scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="../scripts/controller.js"></script>
+</head>
+<body>
+    <div class="header">
+        <a style="color: #fff !important; font-weight: 600; float: left;" href="menu.html">
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
+        Nova Solicitação
+    </div>
+    <div class="conteudo">
+        <form>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active"><a href="#sala" aria-controls="sala" role="tab" data-toggle="tab">Sala</a></li>
+                <li><a href="#lab" aria-controls="lab" role="tab" data-toggle="tab">Laboratório</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="sala">
+                    <div class="row-fluid">
+                        <label>Sala: </label>
+                        <input type="text" name="nome" value="" class="form-control" />
+                    </div>
+                    <div class="row-fluid">
+                        <label>Selecione suas solicitações:</label>
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Cabo VGA / Adaptador
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Caixa de som
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Controle
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Energia
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Internet
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Projetor
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Mouse
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Notebook
+                    </div>
+                    <textarea class="form-control" name="observacao" placeholder="Observação (opcional)"></textarea>
+                    <div class="row-fluid" style="margin-bottom: 15px;">
+                        <a class="btn btn-vermelho" style="float: left;" href="lista_solicitacoes.html">Voltar</a>
+                        <button class="btn btn-vermelho" style="float: right;">Help!</button>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="lab">
+                    <div class="row-fluid">
+                        <label>Laboratório: </label>
+                        <input type="text" name="nome" value="" class="form-control" />
+                    </div>
+                    <div class="row-fluid">
+                        <label>Selecione suas solicitações:</label>
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Caixa de som
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Energia
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Internet
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Periféricos (mouse, teclado, etc.)
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox"> Projetor
+                    </div>
+                    <textarea class="form-control" name="observacao" placeholder="Observação (opcional)"></textarea>
+                    <div class="row-fluid" style="margin-bottom: 15px;">
+                        <a class="btn btn-vermelho" style="float: left;" href="lista_solicitacoes.html">Voltar</a>
+                        <button class="btn btn-vermelho" style="float: right;">Help!</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 ﻿body {
     margin: 0 auto !important;
-    width: 80%;
+    width: 80% !important;
     padding: 0;
 }
 
@@ -33,17 +33,4 @@
 .forgot-password:hover {
     text-decoration: underline;
     cursor: pointer;
-}
-
-.btn-vermelho {
-    color: white !important;
-    background-color: #FF3030;
-    text-shadow: none !important;
-    width: 130px;
-}
-
-.btn-vermelho:hover {
-    color: white !important;
-    opacity: 0.85;
-    text-shadow: none !important;
 }

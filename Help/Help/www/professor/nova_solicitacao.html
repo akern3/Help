@@ -7,16 +7,18 @@
     <link rel="stylesheet" type="text/css" href="css/professor.css">
     <link rel="stylesheet" type="text/css" href="../css/padroes.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-    <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
     <script type="text/javascript" src="../cordova.js"></script>
     <script type="text/javascript" src="../scripts/platformOverrides.js"></script>
     <script type="text/javascript" src="../scripts/controller.js"></script>
 </head>
 <body>
     <div class="header">
-        <a style="color: #fff !important; font-weight: 600; float: left;" href="menu.html">
-            <i class="fa fa-menu" style="color: white !important; font-weight: 600;"></i>
-        </a>
+        <div class="header-icon" style="left: 15px;">
+            <a href="menu.html">
+                ...
+            </a>
+        </div>
         Nova Solicitação
     </div>
     <div class="conteudo">
@@ -58,6 +60,14 @@
                     <div class="row-fluid">
                         <input type="checkbox"> Notebook
                     </div>
+                    <div class="row-fluid">
+                        <label>Nível de urgência:</label>
+                        <select class="form-control">
+                            <option value="1">Baixo</option>
+                            <option value="2">Médio</option>
+                            <option value="3">Alto</option>
+                        </select>
+                    </div>
                     <textarea class="form-control" name="observacao" placeholder="Observação (opcional)"></textarea>
                     <div class="row-fluid" style="margin-bottom: 15px;">
                         <a class="btn btn-vermelho" style="float: left;" href="lista_solicitacoes.html">Voltar</a>
@@ -86,6 +96,14 @@
                     </div>
                     <div class="row-fluid">
                         <input type="checkbox"> Projetor
+                    </div>
+                    <div class="row-fluid">
+                        <label>Nível de urgência:</label>
+                        <select class="form-control">
+                            <option value="1">Baixo</option>
+                            <option value="2">Médio</option>
+                            <option value="3">Alto</option>
+                        </select>
                     </div>
                     <textarea class="form-control" name="observacao" placeholder="Observação (opcional)"></textarea>
                     <div class="row-fluid" style="margin-bottom: 15px;">

@@ -4,7 +4,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <link rel="stylesheet" type="text/css" href="css/professor.css">
+    <link rel="stylesheet" type="text/css" href="css/adm.css">
     <link rel="stylesheet" type="text/css" href="../css/padroes.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <link href="../css/font-awesome.min.css" rel="stylesheet" />
@@ -14,33 +14,28 @@
 </head>
 <body>
     <div class="header">
-        <div class="header-icon" style="left: 15px;">
+        <div class="header-icon" style="float: left;">
             <a href="menu.html">
                 ...
             </a>
         </div>
-        Solicitação
-        <div class="header-icon" style="right: 15px;">
-            <a href="nova_solicitacao.html">
-                +
-            </a>
-        </div>
+        Encerrar Solicitação
     </div>
     <div class="conteudo">
         <div class="solicitacao">
-            <span class="item"><label>Nome do usuário: </label> Fulano</span>
-            <span class="item"><label>Sala: </label> 335</span>
-            <span class="item"><label>Nível de urgência: </label> Médio</span>
-            <span class="item"><label>Data/Hora: </label> 10/05/16 - 18h</span>
-            <span class="item"><label>Motivo: </label> Internet</span>
-            <span class="item"><label>Status: </label> Em aberto</span>
-            <span class="item"><label>Observação:</label></span>
-            <textarea class="form-control" readonly></textarea>
+            <span class="item"><label>Status: </label> Em análise</span>
+            <span class="item"><label>Resolvido? </label></span>
+            <span class="item">
+                <input type="radio" name="resolvido" value="" /> Sim
+                <input type="radio" name="resolvido" value="" /> Não
+            </span>
+            <span class="item" style="margin-top: 10px;"><label>Observação: </label></span>
+            <textarea class="form-control" placeholder="Opcional"></textarea>
         </div>
         <div class="row-fluid">
             <a class="btn btn-vermelho" role="link" href="lista_solicitacoes.html">Voltar</a>
-            <button class="btn btn-vermelho" style="float: right;">Cancelar</button>
-        </div>   
+            <button class="btn btn-vermelho" style="float: right;">Encerrar</button>
+        </div>
     </div>
 </body>
 </html>

@@ -1,3 +1,9 @@
-﻿.row-fluid {
+﻿body {
+    margin: 0 !important;
+    padding: 0;
+    width: 100% !important;
+}
+
+.row-fluid {
     margin: 15px 0;
 }

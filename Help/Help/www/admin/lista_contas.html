@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/adm.css">
+    <link rel="stylesheet" type="text/css" href="../css/padroes.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <script src="../scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script type="text/javascript" src="../scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="../scripts/controller.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="header-icon" style="float: left;">
+            <a href="menu.html">
+                ...
+            </a>
+        </div>
+        Contas
+    </div>
+    <div class="conteudo">
+        <div style="margin: 15px 0;">
+            <label>Função: </label>
+            <select class="form-control">
+                <option value="">Todos</option>
+                <option value="1">Professor</option>
+                <option value="2">Técnico</option>
+            </select>
+        </div>
+        <div style="margin: 15px 0;">
+            <label>Busca: </label>
+            <input type="text" class="form-control" />
+        </div>
+        <div style="overflow-x: auto; margin-bottom: 20px;">
+            <table class="table table-bordered table-striped">
+                <thead style="font-weight: bold;">
+                    <tr>
+                        <td>Nome</td>
+                        <td>E-mail</td>
+                        <td>Matrícula</td>
+                        <td>Função</td>
+                        <td>Ações</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Fulano</td>
+                        <td>fulano@prof.una.br</td>
+                        <td>12345677</td>
+                        <td>Professor</td>
+                        <td><button class="btn btn-default">Editar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Beltrano</td>
+                        <td>beltrano@prof.una.br</td>
+                        <td>098765123</td>
+                        <td>Técnico</td>
+                        <td><button class="btn btn-default">Editar</button></td>
+                    </tr>
+                    <tr>
+                        <td>João</td>
+                        <td>joao@una.br</td>
+                        <td>12345677</td>
+                        <td>Professor</td>
+                        <td><button class="btn btn-default">Editar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a class="btn btn-vermelho" role="link" href="lista_solicitacoes.html">Voltar</a>
+    </div>
+</body>
+</html>

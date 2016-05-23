@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/professor.css">
+    <link rel="stylesheet" type="text/css" href="../css/padroes.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
+    <script src="../scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script type="text/javascript" src="../scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="../scripts/underscore-min.js"></script>
+    <script type="text/javascript" src="../scripts/controller.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="header-icon" style="left: 15px;">
+            <a href="menu.html">
+                ...
+            </a>
+        </div>
+        Nova Solicitação
+    </div>
+    <div class="conteudo">
+        <form>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active" onclick="selecionarAba('sala')"><a href="#sala" aria-controls="sala" role="tab" data-toggle="tab">Sala</a></li>
+                <li onclick="selecionarAba('lab')"><a href="#lab" aria-controls="lab" role="tab" data-toggle="tab">Laboratório</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="sala">
+                    <div class="row-fluid">
+                        <label>Sala: </label>
+                        <input type="text" name="num_sala" value="" class="form-control" />
+                    </div>
+                    <div class="row-fluid">
+                        <label>Selecione suas solicitações:</label>
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="vga" value="vga"> Cabo VGA / Adaptador
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="som" value="som"> Caixa de som
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="controle" value="controle"> Controle
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="energia" value="energia"> Energia
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="internet" value="internet"> Internet
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="projetor" value="projetor"> Projetor
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="mouse" value="mouse"> Mouse
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="notebook" value="notebook"> Notebook
+                    </div>
+                    <div class="row-fluid">
+                        <label>Nível de urgência:</label>
+                        <select class="form-control" name="nivel_urgencia">
+                            <option value="1">Baixo</option>
+                            <option value="2">Médio</option>
+                            <option value="3">Alto</option>
+                        </select>
+                    </div>
+                    <textarea class="form-control" name="observacao" placeholder="Observação (opcional)"></textarea>
+                    <div class="row-fluid" style="margin-bottom: 15px;">
+                        <a class="btn btn-vermelho" style="float: left;" href="lista_solicitacoes.html">Voltar</a>
+                        <button type="submit" class="btn btn-vermelho" style="float: right;">Help!</button>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="lab">
+                    <div class="row-fluid">
+                        <label>Laboratório: </label>
+                        <input type="text" name="num_sala" value="" class="form-control" />
+                    </div>
+                    <div class="row-fluid">
+                        <label>Selecione suas solicitações:</label>
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="som" value="som"> Caixa de som
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="energia" value="energia"> Energia
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="internet" value="internet"> Internet
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="perifericos" value="perifericos"> Periféricos (mouse, teclado, etc.)
+                    </div>
+                    <div class="row-fluid">
+                        <input type="checkbox" name="projetor" value="projetor"> Projetor
+                    </div>
+                    <div class="row-fluid">
+                        <label>Nível de urgência:</label>
+                        <select class="form-control" name="nivel_urgencia">
+                            <option value="1">Baixo</option>
+                            <option value="2">Médio</option>
+                            <option value="3">Alto</option>
+                        </select>
+                    </div>
+                    <textarea class="form-control" name="observacao" placeholder="Observação (opcional)"></textarea>
+                    <div class="row-fluid" style="margin-bottom: 15px;">
+                        <a class="btn btn-vermelho" style="float: left;" href="lista_solicitacoes.html">Voltar</a>
+                        <button class="btn btn-vermelho" style="float: right;">Help!</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using HelpServer.Models;
 using HelpServer.Context;
+using System.Data.Entity.Validation;
 
 namespace HelpServer.Controllers
 {
@@ -18,7 +19,7 @@ namespace HelpServer.Controllers
 
 
 
-        //public ICollection<Solicitacao> solicitacoes { get; set; }
+        public ICollection<Solicitacao> solicitacoes { get; set; }
 
         //public SolicitacaoController()
         //{
@@ -31,9 +32,10 @@ namespace HelpServer.Controllers
         //}
 
         // GET: api/Solicitacao
-        public IQueryable<Solicitacao> Get()
+        public IQueryable <Solicitacao> Get()
         {
             return db.solicitacoes.AsQueryable();
+            //return solicitacoes;
         }
 
         // GET: api/Solicitacao/5
@@ -45,9 +47,17 @@ namespace HelpServer.Controllers
         // POST: api/Solicitacao
         public HttpResponseMessage Post([FromBody]Solicitacao value)
         {
-            db.solicitacoes.Add(value);
-            db.SaveChanges();
-            return Request.CreateResponse(HttpStatusCode.Created);
+
+            try
+            {
+                db.solicitacoes.Add(value);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.Created);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, ex.InnerException.InnerException.Message);
+            }
         }
 
         // PUT: api/Solicitacao/5
@@ -63,9 +73,17 @@ namespace HelpServer.Controllers
         public HttpResponseMessage Delete(int id)
         {
             //todo: implementar exclusão de solicitação
-            db.solicitacoes.Remove(db.solicitacoes.Where(x => x.id == id).First());
-            db.SaveChanges();
-            return Request.CreateResponse(HttpStatusCode.NoContent);
+
+            try
+            {
+                db.solicitacoes.Remove(db.solicitacoes.Where(x => x.id == id).First());
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.NoContent);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, ex.InnerException.InnerException.Message);
+            }
         }
     }
 }

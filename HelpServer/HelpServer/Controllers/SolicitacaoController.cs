@@ -34,14 +34,28 @@ namespace HelpServer.Controllers
         // GET: api/Solicitacao
         public IQueryable <Solicitacao> Get()
         {
-            return db.solicitacoes.AsQueryable();
-            //return solicitacoes;
+            try
+            {
+                return db.solicitacoes.AsQueryable();
+                //return solicitacoes;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         // GET: api/Solicitacao/5
         public Solicitacao Get(long id)
         {
-            return db.solicitacoes.Where(x => x.id == id).First();
+            try
+            {
+                return db.solicitacoes.Where(x => x.id == id).First();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         // POST: api/Solicitacao
@@ -56,7 +70,7 @@ namespace HelpServer.Controllers
             }
             catch (Exception ex)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, ex.InnerException.InnerException.Message);
+                return Request.CreateResponse(HttpStatusCode.ExpectationFailed);
             }
         }
 
@@ -82,7 +96,7 @@ namespace HelpServer.Controllers
             }
             catch (Exception ex)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, ex.InnerException.InnerException.Message);
+                return Request.CreateResponse(HttpStatusCode.ExpectationFailed);
             }
         }
     }

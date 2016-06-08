@@ -18,23 +18,17 @@ namespace HelpServer.Models
         [Key]
         public long id { get; set; }
 
-        //[StringLength(255, ErrorMessage = "O campo observação deve contar no maximo 255 caracteres!")]
+        [StringLength(255, ErrorMessage = "O campo observação deve contar no maximo 255 caracteres!")]
         public string observacao { get; set; }
 
-        //[RegularExpression(@"\d{3]",ErrorMessage = "O campo sala deve contar apenas números")]
+        [RegularExpression(@"\d{3]",ErrorMessage = "O campo sala deve contar apenas números")]
         public string sala { get; set; }
 
         public string andar { get; set; }
 
         public string setor { get; set; }
 
-        private DateTime _Data;
-
-        public DateTime Data
-        {
-            get { return _Data; }
-            set { _Data = value; }
-        }
+        private DateTime Data { get; set; }
 
         public string solicitante { get; set; }
 

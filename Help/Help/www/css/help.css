@@ -1,0 +1,149 @@
+body {
+    margin: 0 ;
+    padding: 0;
+    width: 100%;
+}
+
+.header {
+    background-color: #FF3030;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    padding: 15px;
+    width: 100%;
+}
+
+.conteudo {
+    margin: 40px auto 0 !important;
+    width: 80% !important;
+}
+
+.btn-vermelho {
+    color: white !important;
+    background-color: #FF3030;
+    text-shadow: none !important;
+    width: 130px;
+}
+
+.btn-verde {
+    color: white;
+    background-color: #32A432;
+    width: 130px;
+}
+
+.btn-vermelho:hover, .btn-verde:hover {
+    color: white !important;
+    opacity: 0.85;
+    text-shadow: none !important;
+}
+
+.solicitacao {
+    margin: 15px 0;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #eee;
+    color: black !important;
+    text-decoration: none !important;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.solicitacao:hover {
+    color: black !important;
+    text-decoration: none !important;
+}
+
+.item {
+    display: inline-block;
+    width: 100%;
+    line-height: 20px;
+}
+
+.header-icon {
+    position: absolute;
+    color: #fff !important;
+    width: 30px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.header-icon-menu {
+    color: #fff !important;
+    display: inline-block;
+}
+
+.header-icon a, .header-icon-menu a, .header-icon a:hover, header-icon-menu a:hover {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.row-fluid {
+    margin: 15px 0;
+}
+
+textarea {
+    width: 100%;
+    max-height: 180px;
+    min-height: 100px;
+    overflow-y: auto;
+    resize: none !important;
+}
+
+ul li {
+    width: 50%;
+    text-align: center;
+}
+
+ul li a {
+    color: black;
+}
+
+ul li a:hover {
+    color: black !important;
+    text-decoration: none !important;
+}
+
+.menu {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.menu-icon {
+    display: inline-block;
+    width: 100%;
+    margin: 0 !important;
+    padding: 10px;
+}
+
+.menu li  {
+    margin: 0 !important;
+    list-style-type: none;
+    text-align: left;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.menu li:hover {
+    background-color: #2f2f2f;
+}
+
+.menu li a {
+    color: #fff !important;
+    text-decoration: none;
+    width: 100%;
+}
+
+.menu li a:hover {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}

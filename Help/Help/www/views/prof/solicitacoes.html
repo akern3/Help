@@ -1,0 +1,35 @@
+<div class="animated fadeInDown">
+	<div class="header">
+		<a class="header-icon" style="left: 15px;" ng-href="#/prof/menu">
+			<i class="fa fa-bars"></i>
+		</a>
+		Suas solicitações
+		<a class="header-icon" style="right: 15px;" ng-href="#/prof/new">
+			<i class="fa fa-plus"></i>
+		</a>
+	</div>
+	<div class="conteudo">
+		<div ng-repeat="s in solicitacoes">
+			<a ng-href="#/prof/solicitacao/{{s.id}}">
+				<div class="solicitacao" style="background-color: {{getStatusColor(s.status)}};">
+					<span class="item">
+						<label>{{s.local}}: </label> 
+						{{s.numero}}
+					</span>
+					<span class="item">
+						<label>Data: </label> 
+						{{s.data}}
+					</span>
+					<span class="item">
+						<label>Motivo: </label> 
+						{{s.motivo.join(", ")}}
+					</span>
+					<span class="item">
+						<label>Status: </label> 
+						{{getStatus(s.status)}}
+					</span>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>

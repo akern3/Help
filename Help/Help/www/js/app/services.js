@@ -10,7 +10,7 @@ services.factory('helpServices', function($rootScope) {
 		local: "Sala",
 		numero: 335,
 		motivo: [
-			"vga", "som", "energia"
+			"VGA", "Som", "Energia"
 		],
 		data: 1457751600,
 		nivel_urgencia: 1,
@@ -27,7 +27,7 @@ services.factory('helpServices', function($rootScope) {
 		local: "Sala",
 		numero: 320,
 		motivo: [
-			"projetor", "mouse"
+			"Projetor", "Mouse"
 		],
 		data: 1458010800,
 		nivel_urgencia: 2,
@@ -44,7 +44,7 @@ services.factory('helpServices', function($rootScope) {
 		local: "Laboratório",
 		numero: 350,
 		motivo: [
-			"internet", "periféricos"
+			"Internet", "Periféricos"
 		],
 		data: 1458442800,
 		nivel_urgencia: 3,
@@ -52,6 +52,23 @@ services.factory('helpServices', function($rootScope) {
 		obs: [{
 			id: 1,
 			comentario: "A marioria dos Mouse's não está funcionando.",
+			usuario_id: 1
+		}]
+	},
+	{
+		id: 4,
+		usuario_id:  1,
+		local: "Laboratório",
+		numero: 324,
+		motivo: [
+			"Energia", "Internet"
+		],
+		data: 1458442800,
+		nivel_urgencia: 3,
+		status: 3,
+		obs: [{
+			id: 1,
+			comentario: "A energia caiu e a internet não voltou desde então.",
 			usuario_id: 1
 		}]
 	}];
@@ -84,7 +101,8 @@ services.factory('helpServices', function($rootScope) {
 				delete obj.obs;
 				obj.obs = [];
 			}
-			solicitacoes.push(obj);
+			obj.data = 15431230100;
+			solicitacoes.unshift(obj);
 		},
 		cancelarSolicitacao: function (obj) {
 			var hasChanged = false;

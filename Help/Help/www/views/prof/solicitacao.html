@@ -1,4 +1,4 @@
-<div class="animated fadeInUp">
+<div class="animated fadeIn">
     <div class="header">
         <div class="header-icon" style="left: 15px;">
             <a ng-href="#/">
@@ -21,7 +21,7 @@
                 <label>{{solicitacao.local}}: </label> {{solicitacao.numero}}
             </span>
             <span class="item">
-                <label>Nível de urgência: </label> {{solicitacao.nivel_urgencia}}
+                <label>Nível de urgência: </label> {{getNivelUrgencia(solicitacao.nivel_urgencia)}}
             </span>
             <span class="item">
                 <label>Data: </label> {{solicitacao.data}}

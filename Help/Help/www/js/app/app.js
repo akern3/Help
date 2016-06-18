@@ -139,6 +139,26 @@ app.run(["$rootScope", "$location", function ($rootScope, $location) {
 		}
 	}
 
+	$rootScope.getNivelUrgencia = function (nivel) {
+		switch (nivel) {
+			case 1:
+			return "Baixo";
+			break;
+
+			case 2:
+			return "Médio";
+			break;
+
+			case 3:
+			return "Alto";
+			break;
+
+			default:
+			return "";
+			break;
+		}
+	}
+
 	var history = [];
 
     $rootScope.$on('$routeChangeSuccess', function() {

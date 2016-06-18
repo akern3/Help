@@ -11,6 +11,7 @@ body {
     font-size: 20px;
     padding: 15px;
     width: 100%;
+    font-weight: 600;
 }
 
 .conteudo {
@@ -23,12 +24,14 @@ body {
     background-color: #FF3030;
     text-shadow: none !important;
     width: 130px;
+    font-weight: 600;
 }
 
 .btn-verde {
     color: white;
     background-color: #32A432;
     width: 130px;
+    font-weight: 600;
 }
 
 .btn-vermelho:hover, .btn-verde:hover {
@@ -121,7 +124,7 @@ ul li a:hover {
     list-style-type: none;
     text-align: left;
     width: 100%;
-    padding: 10px;
+    padding: 20px 40px;
     cursor: pointer;
 }
 
@@ -133,6 +136,8 @@ ul li a:hover {
     color: #fff !important;
     text-decoration: none;
     width: 100%;
+    display: block;
+    font-weight: 600;
 }
 
 .menu li a:hover {
@@ -146,4 +151,8 @@ input[type=number]::-webkit-outer-spin-button {
     -moz-appearance: none;
     appearance: none;
     margin: 0;
+}
+
+input[type=checkbox], input[type=radio] {
+    margin: 5px 3px 0 0;
 }

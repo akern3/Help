@@ -12,6 +12,17 @@ controllers.controller('profContaController', ['$scope', '$rootScope', function(
 	$scope.conta.senha = "";
 	$scope.conta.confirmacao = "";
 	console.log($scope.conta);
+
+	$scope.desativarConta = function () {
+		swal({
+				title: "Desativar Conta",
+				text: "Você tem certeza?",
+				type: "warning",
+				cancelButtonText: "Não",
+				confirmButtonText: "Sim",
+				showCancelButton: true
+			});
+	}
 }]);
 
 controllers.controller('profSolicitacaoController', ['$scope', 'solicitacao', 'helpServices', '$location', function($scope, solicitacao, helpServices, $location){
@@ -49,14 +60,14 @@ controllers.controller('novaSolicitacaoController', ['$scope', 'helpServices', '
 			sala: {
 				numero: '',
 				motivo: {
-					vga: false,
-					som: false,
-					controle: false,
-					energia: false,
-					internet: false,
-					projetor: false,
-					mouse: false,
-					notebook: false
+					VGA: false,
+					Som: false,
+					Controle: false,
+					Energia: false,
+					Internet: false,
+					Mouse: false,
+					Notebook: false,
+					Projetor: false
 				},
 				nivel_urgencia: 1,
 				obs: {
@@ -66,11 +77,11 @@ controllers.controller('novaSolicitacaoController', ['$scope', 'helpServices', '
 			lab: {
 				numero: '',
 				motivo: {
-					som: false,
-					energia: false,
-					internet: false,
-					perifericos: false,
-					projetor: false
+					Som: false,
+					Energia: false,
+					Internet: false,
+					Perifericos: false,
+					Projetor: false
 				},
 				nivel_urgencia: 1,
 				obs: {
@@ -123,7 +134,7 @@ controllers.controller('novaSolicitacaoController', ['$scope', 'helpServices', '
 			text: "Sua solicitação foi enviada.",
 			type: "success",
 			showConfirmButton: false,
-			timer: 3000
+			timer: 2000
 		});
 		reload();
 		$location.path ("/");

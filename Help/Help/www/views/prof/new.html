@@ -1,4 +1,4 @@
-<div class="animated fadeInRight">
+<div class="animated fadeIn">
     <div class="header">
         <div class="header-icon" style="left: 15px;">
             <a ng-href="#/prof/menu">
@@ -10,8 +10,8 @@
     <div class="conteudo">
         <form>
             <ul class="nav nav-tabs" role="tablist">
-                <li ng-class="{active: showTab == 'sala'}" ng-click="showTab = 'sala'" style="cursor: pointer;"><a aria-controls="sala" role="tab" data-toggle="tab">Sala</a></li>
-                <li ng-class="{active: showTab == 'lab'}" ng-click="showTab = 'lab'" style="cursor: pointer;"><a aria-controls="lab" role="tab" data-toggle="tab">Laboratório</a></li>
+                <li ng-class="{active: showTab == 'sala'}" ng-click="showTab = 'sala'" style="cursor: pointer;"><a aria-controls="sala" role="tab" data-toggle="tab"><h4>Sala</h4></a></li>
+                <li ng-class="{active: showTab == 'lab'}" ng-click="showTab = 'lab'" style="cursor: pointer;"><a aria-controls="lab" role="tab" data-toggle="tab"><h4>Laboratório</h4></a></li>
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in" ng-class="{active: showTab == 'sala'}" id="sala" ng-show="showTab == 'sala'">
@@ -22,42 +22,42 @@
                         <label>Selecione suas solicitações:</label>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.vga"> Cabo VGA / Adaptador
+                            <input type="checkbox" ng-model="new.sala.motivo.VGA"> Cabo VGA / Adaptador
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.som"> Caixa de som
+                            <input type="checkbox" ng-model="new.sala.motivo.Som"> Caixa de som
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.controle"> Controle
+                            <input type="checkbox" ng-model="new.sala.motivo.Controle"> Controle
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.energia"> Energia
+                            <input type="checkbox" ng-model="new.sala.motivo.Energia"> Energia
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.internet"> Internet
+                            <input type="checkbox" ng-model="new.sala.motivo.Internet"> Internet
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.projetor"> Projetor
+                            <input type="checkbox" ng-model="new.sala.motivo.Mouse"> Mouse
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.mouse"> Mouse
+                            <input type="checkbox" ng-model="new.sala.motivo.Notebook"> Notebook
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.notebook"> Notebook
+                            <input type="checkbox" ng-model="new.sala.motivo.Projetor"> Projetor
                         </label>
                     </div>
                     <div class="row-fluid">
@@ -82,27 +82,27 @@
                     <label>Selecione suas solicitações:</label>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.lab.motivo.som"> Caixa de som
+                            <input type="checkbox" ng-model="new.lab.motivo.Som"> Caixa de som
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.lab.motivo.energia"> Energia
+                            <input type="checkbox" ng-model="new.lab.motivo.Energia"> Energia
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.lab.motivo.internet"> Internet
+                            <input type="checkbox" ng-model="new.lab.motivo.Internet"> Internet
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.lab.motivo.perifericos"> Periféricos (mouse, teclado, etc.)
+                            <input type="checkbox" ng-model="new.lab.motivo.Perifericos"> Periféricos (mouse, teclado, etc.)
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.lab.motivo.projetor"> Projetor
+                            <input type="checkbox" ng-model="new.lab.motivo.Projetor"> Projetor
                         </label>
                     </div>
                     <div class="row-fluid">

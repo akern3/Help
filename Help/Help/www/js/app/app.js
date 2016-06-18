@@ -64,7 +64,7 @@ app.run(["$rootScope", "$location", function ($rootScope, $location) {
 	};
 
 	$rootScope.getUser = function () {
-		return $rootScope.user;	
+		return $rootScope.user;
 	}
 
 	$rootScope.getUserName = function (id) {
@@ -158,6 +158,10 @@ app.run(["$rootScope", "$location", function ($rootScope, $location) {
 			break;
 		}
 	}
+
+	$rootScope.formatDate = function (date) {
+		return moment(date * 1000).format("DD/MM/YYYY");
+	};
 
 	var history = [];
 

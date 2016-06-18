@@ -101,7 +101,7 @@ services.factory('helpServices', function($rootScope) {
 				delete obj.obs;
 				obj.obs = [];
 			}
-			obj.data = 15431230100;
+			obj.data = Date.now() / 1000;
 			solicitacoes.unshift(obj);
 		},
 		cancelarSolicitacao: function (obj) {

@@ -24,7 +24,7 @@
                 <label>Nível de urgência: </label> {{getNivelUrgencia(solicitacao.nivel_urgencia)}}
             </span>
             <span class="item">
-                <label>Data: </label> {{solicitacao.data}}
+                <label>Data: </label> {{formatDate(solicitacao.data)}}
             </span>
             <span class="item">
                 <label>Motivo: </label> {{solicitacao.motivo.join(", ")}}
@@ -42,7 +42,7 @@
         <div class="row-fluid">
             <a class="btn btn-vermelho"  ng-href="#/">Voltar</a>
             <button class="btn btn-vermelho" style="float: right;" ng-click="cancelar(solicitacao)" ng-disabled="solicitacao.status != 1">Cancelar</button>
-        </div>   
+        </div>
     </div>
     <div ng-show="!solicitacao">
         <h4>Solicitação selecionada não disponível</h4>

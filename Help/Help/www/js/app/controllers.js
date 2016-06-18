@@ -112,7 +112,7 @@ controllers.controller('novaSolicitacaoController', ['$scope', 'helpServices', '
 			delete $scope.new.sala.motivo;
 			$scope.new.sala.motivo = motivos;
 			helpServices.salvarSolicitacao($scope.new.sala);
-		} else {			
+		} else {
 			$scope.new.lab.usuario_id = $rootScope.user.id;
 			$scope.new.lab.status = 1;
 			$scope.new.lab.local = "Laboratório";

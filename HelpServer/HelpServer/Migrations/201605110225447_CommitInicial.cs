@@ -7,28 +7,30 @@ namespace HelpServer.Migrations
     {
         public override void Up()
         {
-            CreateTable(
-                "dbo.Solicitacoes",
-                c => new
-                    {
-                        id = c.Long(nullable: false, identity: true),
-                        observacao = c.String(maxLength: 255),
-                        sala = c.String(),
-                        andar = c.String(),
-                        setor = c.String(),
-                        data = c.DateTime(nullable: false),
-                        IdSolicitante = c.String(),
-                        IdResponsavel = c.String(),
-                        criticidade = c.String(),
-                        status = c.String(),
-                    })
-                .PrimaryKey(t => t.id);
-            
+            DropTable("dbo.Solicitacoes");
+
+
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.AspNetUsers");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetRoles");
+
         }
         
         public override void Down()
         {
-            DropTable("dbo.Solicitacoes");
+            
         }
     }
 }

@@ -17,8 +17,8 @@ namespace HelpServer.Migrations
                         andar = c.String(),
                         setor = c.String(),
                         data = c.DateTime(nullable: false),
-                        solicitante = c.String(),
-                        responsavel = c.String(),
+                        IdSolicitante = c.String(),
+                        IdResponsavel = c.String(),
                         criticidade = c.String(),
                         status = c.String(),
                     })

@@ -1,9 +1,12 @@
-﻿using System;
+﻿using HelpServer.Enumerations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
+
 
 namespace HelpServer.Models
 {
@@ -14,31 +17,41 @@ namespace HelpServer.Models
         public Solicitacao()
         {
             problemas = new List<string>();
+            observacao = new List<Observacao>();
+            data = DateTime.Now;
         }
+
         [Key]
-        public long id { get; set; }
+        public long Id { get; set; }
 
-        [StringLength(255, ErrorMessage = "O campo observação deve contar no maximo 255 caracteres!")]
-        public string observacao { get; set; }
+        public IEnumerable<Observacao> observacao { get; set; }
 
-        [RegularExpression(@"\d{3]",ErrorMessage = "O campo sala deve contar apenas números")]
+        [RegularExpression(@"\d{3}",ErrorMessage = "O campo 'sala' deve contar apenas números")]
         public string sala { get; set; }
 
+        [StringLength(50, ErrorMessage = "O campo 'andar' deve contar no maximo 50 caracteres!")]
         public string andar { get; set; }
 
-        public string setor { get; set; }
+        public Setor setor { get; set; }
 
-        private DateTime Data { get; set; }
+        private DateTime _data;
+        [Index]
+        public DateTime data
+        {
+            get { return _data; }
+            set { _data = value; }
+        }
 
-        public string solicitante { get; set; }
 
-        public string responsavel { get; set; }
+        public string IdSolicitante { get; set; }
 
-        ICollection<string> problemas { get; set; }
+        public string IdResponsavel { get; set; }
 
-        public string criticidade { get; set; }
+        public IEnumerable<string> problemas { get; set; }
 
-        public string status { get; set; }
+        public Criticidade criticidade { get; set; }
+
+        public Status status { get; set; }
     }
 
     

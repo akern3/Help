@@ -19,6 +19,7 @@ namespace HelpServer.Context
         #region DbSets para a criação de tabelas no banco de dados
         //Todos os DbSets devem ser criados dentro dessa região
         public DbSet<Solicitacao> solicitacoes { get; set; }
+        public DbSet<Observacao> observacao { get; set; }
         //public DbSet<ApplicationUser> usuarios { get; set; }
 
         #endregion
@@ -27,6 +28,7 @@ namespace HelpServer.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Solicitacao>().ToTable("Solicitacoes");
+            modelBuilder.Entity<Observacao>().ToTable("Observacao");
             //modelBuilder.Entity<ApplicationUser>().ToTable("Usuarios");
             base.OnModelCreating(modelBuilder);
         }

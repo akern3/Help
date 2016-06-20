@@ -5,15 +5,15 @@ namespace HelpServer.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<HelpServer.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<HelpServer.Context.HelpContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "HelpServer.Models.ApplicationDbContext";
+            AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(HelpServer.Models.ApplicationDbContext context)
+        protected override void Seed(HelpServer.Context.HelpContext context)
         {
             //  This method will be called after migrating to the latest version.
 

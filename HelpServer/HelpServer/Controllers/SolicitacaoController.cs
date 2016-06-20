@@ -17,8 +17,6 @@ namespace HelpServer.Controllers
         HelpContext db = new HelpContext();
 
 
-
-
         public ICollection<Solicitacao> solicitacoes { get; set; }
 
         //public SolicitacaoController()
@@ -36,6 +34,7 @@ namespace HelpServer.Controllers
         {
             try
             {
+
                 return db.solicitacoes.AsQueryable();
                 //return solicitacoes;
             }
@@ -50,7 +49,7 @@ namespace HelpServer.Controllers
         {
             try
             {
-                return db.solicitacoes.Where(x => x.id == id).First();
+                return db.solicitacoes.Where(x => x.Id == id).First();
             }
             catch (Exception ex)
             {
@@ -61,7 +60,6 @@ namespace HelpServer.Controllers
         // POST: api/Solicitacao
         public HttpResponseMessage Post([FromBody]Solicitacao value)
         {
-
             try
             {
                 db.solicitacoes.Add(value);
@@ -90,7 +88,7 @@ namespace HelpServer.Controllers
 
             try
             {
-                db.solicitacoes.Remove(db.solicitacoes.Where(x => x.id == id).First());
+                db.solicitacoes.Remove(db.solicitacoes.Where(x => x.Id == id).First());
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.NoContent);
             }

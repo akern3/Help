@@ -8,6 +8,8 @@ using HelpServer.Models;
 using HelpServer.Context;
 using System.Data.Entity.Validation;
 using HelpServer.Repositorios;
+using System.Web.Http.Cors;
+
 
 namespace HelpServer.Controllers
 {
@@ -17,7 +19,7 @@ namespace HelpServer.Controllers
 
         static readonly ISolicitacaoRepository repositorio = new SolicitacaoRepository();
 
-
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         // GET: api/Solicitacao
         public IEnumerable <Solicitacao> Get()
         {

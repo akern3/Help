@@ -16,6 +16,8 @@ using Microsoft.Owin.Security.OAuth;
 using HelpServer.Models;
 using HelpServer.Providers;
 using HelpServer.Results;
+using System.Web.Http.Cors;
+
 
 namespace HelpServer.Controllers
 {
@@ -51,6 +53,7 @@ namespace HelpServer.Controllers
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]

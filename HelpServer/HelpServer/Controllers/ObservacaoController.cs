@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
+
 
 namespace HelpServer.Controllers
 {
@@ -19,6 +21,7 @@ namespace HelpServer.Controllers
         IEnumerable<Observacao> observacoes = new List<Observacao>();
         static readonly IObservacaoRepository repositorio = new ObservacaoRepository();
 
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         // GET: api/Observacao
         public IEnumerable<Observacao> Get()
         {

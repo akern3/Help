@@ -1,4 +1,5 @@
 ﻿using HelpServer.Enumerations;
+using HelpServer.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +12,7 @@ using System.Web;
 namespace HelpServer.Models
 {
 
-    public class Solicitacao
+    public class Solicitacao 
     {
 
         public Solicitacao()

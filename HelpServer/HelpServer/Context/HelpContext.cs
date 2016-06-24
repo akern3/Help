@@ -32,6 +32,7 @@ namespace HelpServer.Context
             //modelBuilder.Entity<ApplicationUser>().ToTable("Usuarios");
             base.OnModelCreating(modelBuilder);
         }
+        
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HelpServer.Repositorios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +8,7 @@ using System.Web;
 
 namespace HelpServer.Models
 {
-    public class Observacao
+    public class Observacao 
     {
 
         public Observacao()

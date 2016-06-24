@@ -48,6 +48,20 @@ namespace HelpServer.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "matricula")]
+        public string matricula { get; set; }
+
+        [Display(Name = "Acesso Aprovado")]
+        public bool acessoAprovado { get; set; }
+
+        [Display(Name = "Ativo")]
+        public bool ativo { get; set; }
+
+        [Required]
+        [Display(Name = "Nome")]
+        public string nome { get; set; }
     }
 
     public class RegisterExternalBindingModel

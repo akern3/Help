@@ -237,6 +237,7 @@
     <Compile Include="Context\HelpContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ObservacaoController.cs" />
     <Compile Include="Controllers\SolicitacaoController.cs" />
     <Compile Include="Enumerations\Setor.cs" />
     <Compile Include="Enumerations\Status.cs" />
@@ -272,10 +273,14 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Enumerations\Criticidade.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Repositorios\IObservacaoRepository.cs" />
+    <Compile Include="Repositorios\ISolicitacaoRepository.cs" />
     <Compile Include="Models\Observacao.cs" />
     <Compile Include="Models\Solicitacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Repositorios\ObservacaoRepository.cs" />
+    <Compile Include="Repositorios\SolicitacaoRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

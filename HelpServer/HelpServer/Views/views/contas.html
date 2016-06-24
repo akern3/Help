@@ -1,0 +1,41 @@
+<div class="animated fadeIn">
+    <a class="btn btn-verde" ng-href="#/cadastro">Novo Usuário</a>
+    <table datatable="ng" class="row-border table-striped" dt-options="dtOptions" dt-column-defs="dtColumnDefs"
+           dt-instance="dtInstanceCallback" width="100%;">
+        <thead>
+        <tr>
+            <th>Status</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Matrícula</th>
+            <th>Cargo</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="c in contas">
+            <td style="color: {{c.status === 1 ? 'green' : 'red'}}">
+                {{c.status === 1 ? 'Ativo' : 'Inativo'}}
+            </td>
+            <td>
+                {{c.name}}
+            </td>
+            <td>
+                {{c.email}}
+            </td>
+            <td>
+                {{c.matricula}}
+            </td>
+            <td>
+                {{getTipo(c.tipo)}}
+            </td>
+            <td style="text-align: center;">
+                <i class="fa fa-{{c.status === 1 ? 'close' : 'check'}}" data-toggle="tooltip" title="Ativar/Desativar" ng-click="desativarConta()" style="cursor: pointer;"></i>
+                <a ng-href="#/conta/{{c.id}}" data-toggle="tooltip" title="Editar">
+                    <i class="fa fa-pencil"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

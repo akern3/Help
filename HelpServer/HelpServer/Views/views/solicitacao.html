@@ -1,0 +1,37 @@
+<div class="animated fadeIn">
+    <div class="conteudo" ng-show="solicitacao">
+        <div class="solicitacao" style="background-color: {{getStatusColor(solicitacao.status)}}">
+            <span class="item">
+                <label>Nome do usuário: </label> {{getUserName(solicitacao.usuario_id)}}
+            </span>
+            <span class="item">
+                <label>{{solicitacao.local}}: </label> {{solicitacao.numero}}
+            </span>
+            <span class="item">
+                <label>Nível de urgência: </label> {{getNivelUrgencia(solicitacao.nivel_urgencia)}}
+            </span>
+            <span class="item">
+                <label>Data: </label> {{formatDate(solicitacao.data)}}
+            </span>
+            <span class="item">
+                <label>Motivo: </label> {{solicitacao.motivo.join(", ")}}
+            </span>
+            <span class="item">
+                <label>Status: </label> {{getStatus(solicitacao.status)}}
+            </span>
+            <div class="item" ng-show="solicitacao.obs.length">
+                <label>{{solicitacao.obs.length == 1 ? 'Observação' : 'Observações'}}</label>
+                <div ng-repeat="o in solicitacao.obs">
+                    <textarea class="form-control" readonly v>{{o.comentario}}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <a class="btn btn-vermelho"  ng-href="#/">Voltar</a>
+            <button class="btn btn-vermelho" style="float: right;" ng-click="cancelar(solicitacao)" ng-disabled="solicitacao.status != 1">Cancelar</button>
+        </div>
+    </div>
+    <div ng-show="!solicitacao">
+        <span>Solicitação não disponível no momento. Tente novamente mais tarde.</span>
+    </div>
+</div>

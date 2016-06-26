@@ -14,5 +14,7 @@ namespace HelpServer.Repositorios
         Solicitacao Add(Solicitacao item);
         void Remove(Solicitacao id);
         bool Update(long id,Solicitacao item);
+        bool UpdateStatus(long id, int status);
+        bool AlterarResponsavel(long id, string responsavel);
     }
 }

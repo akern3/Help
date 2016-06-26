@@ -65,35 +65,25 @@ namespace HelpServer.Controllers
 
         }
 
+        [Route("api/Solicitacao/AlterarStatus/{id}")]
+        public HttpResponseMessage PatchAlterarStatusSolicitacao(long id, [FromBody]int status)
+        {
+           return repositorio.UpdateStatus(id, status)? Request.CreateResponse<int>(HttpStatusCode.OK, status) : Request.CreateResponse<int>(HttpStatusCode.BadRequest, status);
+           
+        }
+
+        [Route("api/Solicitacao/AlterarResponsavel/{id}")]
+        public HttpResponseMessage PatchAlterarResponsavelSolicitacao(long id, [FromBody]string responsavel)
+        {
+            return repositorio.AlterarResponsavel(id, responsavel)? Request.CreateResponse<string>(HttpStatusCode.OK, responsavel) : Request.CreateResponse<string>(HttpStatusCode.BadRequest, responsavel);
+
+        }
+
+
         // PUT: api/Solicitacao/5
         public void Put(long id, [FromBody]Solicitacao value)
         {
-            //todo: implementar alteração de solicitação
 
-            //try
-            //{
-            //    var temp = db.db.Find(id);
-            //    if (temp != null)
-            //    {
-            //        temp.andar = value.andar != "" ? value.andar : temp.andar ;
-            //        temp.criticidade = value.criticidade > 0 ? value.criticidade : temp.criticidade;
-            //        temp.data = value.data != null ? value.data : temp.data;
-            //        temp.sala = value.sala != "" ? value.sala : temp.sala;
-            //        temp.setor = value.setor > 0 ? value.setor : temp.setor;
-            //    }
-            //    db.SaveChanges();
-            //    return Request.CreateResponse(HttpStatusCode.OK);
-            //}
-            //catch (Exception ex)
-            //{
-
-            //    throw ;
-            //}
-            
-            //if (!repositorio.Update(value))
-            //{
-            //    throw new HttpResponseException(HttpStatusCode.NotFound);
-            //}
             repositorio.Update(id,value);
 
         }

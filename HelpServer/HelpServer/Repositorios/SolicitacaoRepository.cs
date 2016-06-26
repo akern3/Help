@@ -73,5 +73,51 @@ namespace HelpServer.Repositorios
             db.SaveChanges();
             return true;
         }
+
+        public bool UpdateStatus(long id, int status)
+        {
+            if (status < 1 || status > 3)
+            {
+                throw new ArgumentOutOfRangeException("status");
+            }
+
+            try
+            {
+                Solicitacao sol = db.solicitacoes.Find(id);
+                sol.status = (Enumerations.Status)status;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+            
+
+        }
+
+        public bool AlterarResponsavel(long id, string responsavel)
+        {
+            if (responsavel == null)
+            {
+                throw new ArgumentNullException("responsavel");
+            }
+
+            try
+            {
+                Solicitacao sol = db.solicitacoes.Find(id);
+                sol.IdResponsavel = responsavel;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            
+        }
+
     }
 }

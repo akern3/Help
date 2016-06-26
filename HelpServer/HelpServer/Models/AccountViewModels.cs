@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 
 namespace HelpServer.Models
@@ -23,15 +24,25 @@ namespace HelpServer.Models
         public IEnumerable<UserLoginInfoViewModel> Logins { get; set; }
 
         public IEnumerable<ExternalLoginViewModel> ExternalLoginProviders { get; set; }
+
+
+        #region Incluidos manualmente
+
+        public string nome { get; set; }
+        public string matricula { get; set; }
+        public ICollection<IdentityUserRole> roles { get; set; }
+        #endregion
     }
 
     public class UserInfoViewModel
     {
+
         public string Email { get; set; }
 
         public bool HasRegistered { get; set; }
 
         public string LoginProvider { get; set; }
+
     }
 
     public class UserLoginInfoViewModel
@@ -39,5 +50,6 @@ namespace HelpServer.Models
         public string LoginProvider { get; set; }
 
         public string ProviderKey { get; set; }
+
     }
 }

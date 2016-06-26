@@ -78,7 +78,7 @@ namespace HelpServer.Controllers
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
-            IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user == null)
             {
@@ -108,6 +108,13 @@ namespace HelpServer.Controllers
             return new ManageInfoViewModel
             {
                 LocalLoginProvider = LocalLoginProvider,
+
+                #region Incluidos Manualmente
+                nome = user.nome,
+                matricula = user.matricula,
+                roles = user.Roles,
+                #endregion
+
                 Email = user.UserName,
                 Logins = logins,
                 ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
@@ -328,7 +335,7 @@ namespace HelpServer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, matricula = model.matricula, nome = model.nome };
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, matricula = model.matricula, nome = model.nome, ativo = true, acessoAprovado = false };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 

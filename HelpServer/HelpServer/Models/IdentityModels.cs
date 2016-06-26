@@ -10,11 +10,15 @@ namespace HelpServer.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        #region Incluidos Manualmente
         public string nome { get; set; }
         [Required]
         public string matricula { get; set; }
         public bool acessoAprovado { get; set; }
-        public bool ativo { get; set; }
+        public bool ativo { get; set; } 
+        #endregion
+
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

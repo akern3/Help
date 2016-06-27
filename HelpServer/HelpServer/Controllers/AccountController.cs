@@ -445,14 +445,20 @@ namespace HelpServer.Controllers
             if (aprovado)
             {
                 var result = await UserManager.SetLockoutEnabledAsync(id, !aprovado);
+                UserManager.SetLockoutEndDate(id, DateTimeOffset.MinValue);
+                var usuario = UserManager.FindById(id);
+                usuario.acessoAprovado = aprovado;
+                UserManager.Update(usuario);
             }
             else
             {
                 var result = await UserManager.SetLockoutEnabledAsync(id, aprovado);
                 UserManager.SetLockoutEndDate(id, DateTime.MaxValue);
+                var usuario = UserManager.FindById(id);
+                usuario.acessoAprovado = aprovado;
+                UserManager.Update(usuario);
             }
         }
-
 
         #endregion
         protected override void Dispose(bool disposing)

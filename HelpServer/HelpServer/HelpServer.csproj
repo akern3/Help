@@ -300,6 +300,13 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\animate.min.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\datatables.bootstrap.min.css" />
+    <Content Include="Content\css\jquery.dataTables.min.css" />
+    <Content Include="Content\css\loading.css" />
+    <Content Include="Content\css\site.css" />
+    <Content Include="Content\css\sweetalert.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -338,6 +345,19 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\angular-datatables.bootstrap.min.js" />
+    <Content Include="Scripts\js\angular-datatables.min.js" />
+    <Content Include="Scripts\js\angular-route.min.js" />
+    <Content Include="Scripts\js\angular.min.js" />
+    <Content Include="Scripts\js\app\app.js" />
+    <Content Include="Scripts\js\app\controllers.js" />
+    <Content Include="Scripts\js\app\services.js" />
+    <Content Include="Scripts\js\bootstrap.min.js" />
+    <Content Include="Scripts\js\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\js\moment.min.js" />
+    <Content Include="Scripts\js\ng-sweet-alert.js" />
+    <Content Include="Scripts\js\sweetalert.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -385,6 +405,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\index.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605110225447_CommitInicial.resx">

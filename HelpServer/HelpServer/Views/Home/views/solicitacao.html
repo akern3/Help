@@ -2,19 +2,19 @@
     <div class="conteudo" ng-show="solicitacao">
         <div class="solicitacao" style="background-color: {{getStatusColor(solicitacao.status)}}">
             <span class="item">
-                <label>Nome do usuário: </label> {{getUserName(solicitacao.usuario_id)}}
+                <label>Nome do usuário: </label> {{getUserName(solicitacao.IdSolicitante)}}
             </span>
             <span class="item">
                 <label>{{solicitacao.local}}: </label> {{solicitacao.numero}}
             </span>
             <span class="item">
-                <label>Nível de urgência: </label> {{getNivelUrgencia(solicitacao.nivel_urgencia)}}
+                <label>Nível de urgência: </label> {{getNivelUrgencia(solicitacao.criticidade)}}
             </span>
             <span class="item">
-                <label>Data: </label> {{formatDate(solicitacao.data)}}
+                <label>Data: </label> {{solicitacao.data}}
             </span>
             <span class="item">
-                <label>Motivo: </label> {{solicitacao.motivo.join(", ")}}
+                <label>Motivo: </label> {{solicitacao.problemas.join(", ")}}
             </span>
             <span class="item">
                 <label>Status: </label> {{getStatus(solicitacao.status)}}
@@ -30,8 +30,5 @@
             <a class="btn btn-vermelho"  ng-href="#/">Voltar</a>
             <button class="btn btn-vermelho" style="float: right;" ng-click="cancelar(solicitacao)" ng-disabled="solicitacao.status != 1">Cancelar</button>
         </div>
-    </div>
-    <div ng-show="!solicitacao">
-        <span>Solicitação não disponível no momento. Tente novamente mais tarde.</span>
     </div>
 </div>

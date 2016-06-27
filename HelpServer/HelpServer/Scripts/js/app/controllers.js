@@ -17,7 +17,7 @@ controllers.controller('solicitacoesController', ['$scope', '$http', '$interval'
 
     $interval(function () {
         $scope.load();
-    }, 30000)
+    }, 20000)
 }]);
 
 controllers.controller('contasController', ['$scope', 'DTOptionsBuilder', 'DTColumnDefBuilder', 'helpServices', '$timeout', function($scope, DTOptionsBuilder, DTColumnDefBuilder, helpServices, $timeout){
@@ -137,33 +137,17 @@ controllers.controller('contaController', ['$scope', 'conta', '$location', 'help
 	};
 }]);
 
-controllers.controller('solicitacaoController', ['$scope', 'solicitacao', 'helpServices', '$location', function($scope, solicitacao, helpServices, $location){
-	$scope.solicitacao = solicitacao;
-	console.log($scope.solicitacao);
+controllers.controller('solicitacaoController', ['$scope', 'id', '$location', '$http', function ($scope, id, $location, $http) {
+    $scope.load = function () {
+        $(".loading").show();
+        $http.get("http://helpserver20160512124409.azurewebsites.net/api/solicitacao/" + id).then(function (payload) {
+            $scope.solicitacao = payload.data;
+            console.log($scope.solicitacoes);
+            $(".loading").hide();
+        });
+    };
 
-	$scope.cancelar = function (obj) {
-		$(".loading").show();
-		var ret = helpServices.cancelarSolicitacao(obj);
-		if (ret) {
-			$(".loading").hide();
-			swal({
-				title: "Sucesso!",
-				text: "Solicitação cancelada.",
-				type: "success",
-				showConfirmButton: false,
-				timer: 3000
-			});
-			$location.path("/solicitacoes");
-		} else {
-			$(".loading").hide();
-			swal({
-				title: "Erro!",
-				text: "Ocorreu um problema. Tente novamente mais tarde.",
-				type: "error",
-				showConfirmButton: true
-			});
-		}
-	}
+    $scope.load();
 }]);
 
 controllers.controller('cadastroController', ['$scope', 'helpServices', '$location', function($scope, helpServices, $location){

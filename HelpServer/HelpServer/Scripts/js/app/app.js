@@ -23,12 +23,12 @@ app.config(["$routeProvider", function ($routeProvider) {
 		controller: "solicitacoesController",
 		title: "Solicitações"
 	}).when("/solicitacao/:id", {
-	    templateUrl: "Views/Help/solicitacao.html",
+	    templateUrl: "Views/Home/views/solicitacao.html",
 		controller: "solicitacaoController",
 		title: "Solicitação",
 		resolve: {
-			solicitacao: function (helpServices, $route) {
-				return helpServices.getSolicitacao($route.current.params.id);
+			id: function ($route) {
+				return $route.current.params.id;
 			}
 		}
 	}).when("/contas", {

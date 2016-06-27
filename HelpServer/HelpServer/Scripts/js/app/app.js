@@ -17,12 +17,7 @@ app.config(["$routeProvider", function ($routeProvider) {
 	$routeProvider.when("/", {
 		templateUrl: "Views/Home/views/solicitacoes.html",
 		controller: "solicitacoesController",
-		title: "Solicitações",
-		resolve: {
-			solicitacoes: function (helpServices) {
-				return helpServices.getSolicitacoes();
-			}
-		}
+		title: "Solicitações"
 	}).when("/solicitacoes", {
 	    templateUrl: "Views/Home/views/solicitacoes.html",
 		controller: "solicitacoesController",

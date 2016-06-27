@@ -80,11 +80,19 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -333,6 +341,33 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Home\css\animate.min.css" />
+    <Content Include="Views\Home\css\bootstrap.min.css" />
+    <Content Include="Views\Home\css\datatables.bootstrap.min.css" />
+    <Content Include="Views\Home\css\jquery.dataTables.min.css" />
+    <Content Include="Views\Home\css\loading.css" />
+    <Content Include="Views\Home\css\site.css" />
+    <Content Include="Views\Home\css\sweetalert.css" />
+    <Content Include="Views\Home\js\angular-datatables.bootstrap.min.js" />
+    <Content Include="Views\Home\js\angular-datatables.min.js" />
+    <Content Include="Views\Home\js\angular-route.min.js" />
+    <Content Include="Views\Home\js\angular.min.js" />
+    <Content Include="Views\Home\js\app\app.js" />
+    <Content Include="Views\Home\js\app\controllers.js" />
+    <Content Include="Views\Home\js\app\services.js" />
+    <Content Include="Views\Home\js\bootstrap.min.js" />
+    <Content Include="Views\Home\js\jquery-1.12.4.min.js" />
+    <Content Include="Views\Home\js\jquery.dataTables.min.js" />
+    <Content Include="Views\Home\js\moment.min.js" />
+    <Content Include="Views\Home\js\ng-sweet-alert.js" />
+    <Content Include="Views\Home\js\sweetalert.min.js" />
+    <Content Include="Views\Home\views\cadastro.html" />
+    <Content Include="Views\Home\views\conta.html" />
+    <Content Include="Views\Home\views\contas.html" />
+    <Content Include="Views\Home\views\encerrarSol.html" />
+    <Content Include="Views\Home\views\pendentes.html" />
+    <Content Include="Views\Home\views\solicitacao.html" />
+    <Content Include="Views\Home\views\solicitacoes.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

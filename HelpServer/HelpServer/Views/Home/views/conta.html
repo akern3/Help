@@ -1,20 +1,20 @@
 <div class="animated fadeIn">
     <form name="contaForm" ng-submit="salvar()" ng-show="conta">
-        <div class="solicitacao">
+        <div class="solicitacao" id="data" style="display: none;">
             <div>
                 <span class="item" style="margin-bottom: 10px;">
                     <label>Cargo * </label> 
-                    <select class="form-control" ng-model="conta.tipo" required>
-                        <option value="1" ng-selected="conta.tipo == 1">Professor</option>
-                        <option value="2" ng-selected="conta.tipo == 2">Técnico</option>
-                        <option value="3" ng-selected="conta.tipo == 3">Administrador</option>
+                    <select class="form-control" ng-model="conta.roles[0]" required>
+                        <option value="Professor" ng-selected="conta.roles[0] == 'Professor'">Professor</option>
+                        <option value="Tecnico" ng-selected="conta.roles[0] == 'Tecnico'">Técnico</option>
+                        <option value="Administrador" ng-selected="conta.roles[0] == 'Administrador'">Administrador</option>
                     </select>
                 </span>
                 <span class="item" style="margin-bottom: 10px;">
-                    <label>Nome do usuário *</label> <input type="text" class="form-control" ng-model="conta.name" required>
+                    <label>Nome do usuário *</label> <input type="text" class="form-control" ng-model="conta.nome" required>
                 </span>
                 <span class="item" style="margin-bottom: 10px;">
-                    <label>E-mail * </label> <input type="text" class="form-control" ng-model="conta.email" required> 
+                    <label>E-mail * </label> <input type="text" class="form-control" ng-model="conta.userName" required> 
                 </span>
                 <span class="item" style="margin-bottom: 10px;">
                     <label>Matrícula * </label> <input type="text" class="form-control" ng-model="conta.matricula" required>
@@ -35,7 +35,7 @@
             <button class="btn btn-verde" style="float: right;" type="submit" ng-disabled="contaForm.$invalid">Salvar</button>
         </div> 
     </form>
-    <div ng-show="!conta">
+    <div id="empty" style="display: none;">
         <h4>Ocorreu um problema. Tente novamente mais tarde.</h4>
     </div>
 </div>

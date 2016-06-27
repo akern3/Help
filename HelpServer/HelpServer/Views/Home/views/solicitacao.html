@@ -1,11 +1,11 @@
 <div class="animated fadeIn">
-    <div class="conteudo" ng-show="solicitacao">
+    <div class="conteudo" id="data" style="display: none;">
         <div class="solicitacao" style="background-color: {{getStatusColor(solicitacao.status)}}">
             <span class="item">
                 <label>Nome do usuário: </label> {{getUserName(solicitacao.IdSolicitante)}}
             </span>
             <span class="item">
-                <label>{{solicitacao.local}}: </label> {{solicitacao.numero}}
+                <label>Sala: </label> {{solicitacao.sala}}
             </span>
             <span class="item">
                 <label>Nível de urgência: </label> {{getNivelUrgencia(solicitacao.criticidade)}}
@@ -14,13 +14,16 @@
                 <label>Data: </label> {{solicitacao.data}}
             </span>
             <span class="item">
-                <label>Motivo: </label> {{solicitacao.problemas.join(", ")}}
+                <label>Motivo(s): </label> {{solicitacao.problemas.join(", ")}}
             </span>
             <span class="item">
                 <label>Status: </label> {{getStatus(solicitacao.status)}}
             </span>
-            <div class="item" ng-show="solicitacao.obs.length">
-                <label>{{solicitacao.obs.length == 1 ? 'Observação' : 'Observações'}}</label>
+            <span class="item" ng-show="solicitacao.IdResponsavel !== ''">
+                <label>Responsável: </label> {{getUserName(solicitacao.IdResponsavel)}}
+            </span>
+            <div class="item" ng-show="solicitacao.observacao.length">
+                <label>{{solicitacao.observacao.length == 1 ? 'Observação' : 'Observações'}}</label>
                 <div ng-repeat="o in solicitacao.obs">
                     <textarea class="form-control" readonly v>{{o.comentario}}</textarea>
                 </div>
@@ -30,5 +33,8 @@
             <a class="btn btn-vermelho"  ng-href="#/">Voltar</a>
             <button class="btn btn-vermelho" style="float: right;" ng-click="cancelar(solicitacao)" ng-disabled="solicitacao.status != 1">Cancelar</button>
         </div>
+    </div>
+    <div id="empty" style="display: none;">
+        Solicitação não disponível. Tente novamente mais tarde.
     </div>
 </div>

@@ -1,18 +1,18 @@
 <div class="animated fadeIn">
-	<div ng-show="pendentes.length">
+	<div id="data" style="display: none;">
 		<div ng-repeat="p in pendentes" class="col-xs-12 col-sm-6 col-md-4">
 			<div class="solicitacao">
 					<span class="item">
 						<label>Nome: </label>
-						{{p.name}}
+						{{p.nome}}
 					</span>
 					<span class="item">
 						<label>Email: </label>
-						{{p.email}}
+						{{p.userName}}
 					</span>
 					<span class="item">
 						<label>Cargo: </label>
-						{{getTipo(p.tipo)}}
+						{{p.roles.join(', ')}}
 					</span>
 					<span class="item">
 						<label>Matrícula: </label>
@@ -30,7 +30,7 @@
 			</div>
 		</div>
 	</div>
-	<div ng-show="!pendentes.length">
+	<div id="empty" style="display: none;">
 		<span>
 			Nenhum cadastro pendente no momento.
 		</span>

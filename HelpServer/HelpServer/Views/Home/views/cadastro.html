@@ -4,26 +4,26 @@
             <div>
                 <span class="item" style="margin-bottom: 10px;">
                     <label>Cargo *</label> 
-                    <select class="form-control" ng-model="user.tipo" required>
-                        <option value="1" ng-selected="user.tipo == 1">Professor</option>
-                        <option value="2" ng-selected="user.tipo == 2">Técnico</option>
-                        <option value="3" ng-selected="user.tipo == 3">Administrador</option>
+                    <select class="form-control" ng-model="user.roles[0]" required>
+                        <option value="Professor" ng-selected="user.roles[0] == 'Professor'">Professor</option>
+                        <option value="Tecnico" ng-selected="user.roles[0] == 'Tecnico'">Técnico</option>
+                        <option value="Administrador" ng-selected="user.roles[0] == 'Administrador'">Administrador</option>
                     </select>
                 </span>
                 <span class="item" style="margin-bottom: 10px;">
-                    <label>Nome do usuário *</label> <input type="text" class="form-control" ng-model="user.name" required>
+                    <label>Nome do usuário *</label> <input type="text" class="form-control" ng-model="user.nome" required>
                 </span>
                 <span class="item" style="margin-bottom: 10px;">
-                    <label>E-mail *</label> <input type="text" class="form-control" ng-model="user.email" required>
+                    <label>E-mail *</label> <input type="text" class="form-control" ng-model="user.Email" required>
                 </span>
                 <span class="item" style="margin-bottom: 10px;">
                     <label>Matrícula *</label> <input type="text" class="form-control" ng-model="user.matricula" required>
                 </span>
                 <span class="item" style="margin-bottom: 10px;">
-                    <label>Nova senha *</label> <input type="password" class="form-control" ng-model="user.senha" required>
+                    <label>Nova senha *</label> <input type="password" class="form-control" ng-model="user.Password" required>
                 </span>
                 <span class="item" style="margin-bottom: 10px;">
-                    <label>Confirme sua senha *</label> <input type="password" class="form-control" ng-model="user.confirmacao" required>
+                    <label>Confirme sua senha *</label> <input type="password" class="form-control" ng-model="user.ConfirmPassword" required>
                 </span>
             </div>
         </div>

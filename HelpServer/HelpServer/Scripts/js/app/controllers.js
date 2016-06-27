@@ -20,9 +20,17 @@ controllers.controller('solicitacoesController', ['$scope', '$http', '$interval'
     }, 20000)
 }]);
 
-controllers.controller('contasController', ['$scope', 'DTOptionsBuilder', 'DTColumnDefBuilder', 'helpServices', '$timeout', function($scope, DTOptionsBuilder, DTColumnDefBuilder, helpServices, $timeout){
-	$scope.contas = helpServices.getUsers();
-	console.log($scope.contas);
+controllers.controller('contasController', ['$scope', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$timeout', '$http', function($scope, DTOptionsBuilder, DTColumnDefBuilder, $timeout, $http){
+	$scope.load = function () {
+	    $(".loading").show();
+	    $http.get("http://helpserver20160512124409.azurewebsites.net/api/account/buscarusuarios").then(function (payload) {
+	        $scope.contas = payload.data;
+            console.log($scope.contas);
+	        $(".loading").hide();
+	    });
+	}
+
+	$scope.load();
 
 	$scope.desativarConta = function () {
 		swal({
@@ -96,11 +104,33 @@ controllers.controller('contasController', ['$scope', 'DTOptionsBuilder', 'DTCol
     };
 }]);
 
-controllers.controller('contaController', ['$scope', 'conta', '$location', 'helpServices', function($scope, conta, $location, helpServices){
-	$scope.conta = conta;
-	$scope.conta.senha = "";
-	$scope.conta.confirmacao = "";
-	console.log($scope.conta);
+controllers.controller('contaController', ['$scope', 'id', '$location', '$http', function($scope, id, $location, $http){
+    console.log(id);
+    $scope.load = function () {
+        $(".loading").show();
+        $http.get("http://helpserver20160512124409.azurewebsites.net/api/account/buscarusuarios").then(function (payload) {
+            var contas = payload.data;
+            contas.forEach(function (element) {
+                if (element.id == id) {
+                    console.log(element);
+                    $scope.conta = element;
+                    $scope.conta.senha = "";
+                    $scope.conta.confirmacao = "";
+                    console.log($scope.conta);
+                }
+            });
+            $(".loading").hide();
+            if ($scope.conta) {
+                $("#data").show();
+                $("#empty").hide();
+            } else {
+                $("#data").hide();
+                $("#empty").show();
+            }
+        });
+    }
+
+    $scope.load();
 
 	$scope.excluirConta = function () {
 		swal({
@@ -139,40 +169,58 @@ controllers.controller('contaController', ['$scope', 'conta', '$location', 'help
 
 controllers.controller('solicitacaoController', ['$scope', 'id', '$location', '$http', function ($scope, id, $location, $http) {
     $scope.load = function () {
+        $("#data").hide();
+        $("#empty").hide();
         $(".loading").show();
         $http.get("http://helpserver20160512124409.azurewebsites.net/api/solicitacao/" + id).then(function (payload) {
             $scope.solicitacao = payload.data;
-            console.log($scope.solicitacoes);
             $(".loading").hide();
+            if ($scope.solicitacao.length) {
+                $("#data").show();
+                $("#empty").hide();
+            } else {
+                $("#data").hide();
+                $("#empty").show();
+            }
         });
     };
 
     $scope.load();
 }]);
 
-controllers.controller('cadastroController', ['$scope', 'helpServices', '$location', function($scope, helpServices, $location){
+controllers.controller('cadastroController', ['$scope', '$location', '$http', '$timeout', function($scope, $location, $http, $timeout){
 	$scope.user = {
-		tipo: 1,
+		roles:["Professor"],
 		nome: "",
-		email: "",
+		Email: "",
 		matricula: "",
-		senha: "",
-		confirmacao: ""
+		Password: "",
+		ConfirmPassword: ""
 	};
 	
 	$scope.salvar = function () {
 		$(".loading").show();
-		if ($scope.user.senha === $scope.user.confirmacao) {
-			helpServices.novoUsuario($scope.user);
-			$(".loading").hide();
-			swal({
-				title: "Sucesso!",
-				text: "Usuário cadastrado.",
-				type: "success",
-				showConfirmButton: false,
-				timer: 2000
-			});
-			$location.path ("/contas");
+		if ($scope.user.Password === $scope.user.ConfirmPassword) {
+		    $http.post("http://helpserver20160512124409.azurewebsites.net/api/account/register", $scope.user).success(function () {
+		        $(".loading").hide();
+		        swal({
+		            title: "Sucesso!",
+		            text: "Usuário cadastrado.",
+		            type: "success",
+		            showConfirmButton: false,
+		            timer: 2000
+		        });
+		        $timeout(function () {
+		            $location.path("/contas");
+		        }, 2500);
+		    }).error(function () {
+		        $(".loading").hide();
+		        swal({
+		            title: "Erro!",
+		            text: "Não foi possível cadastrar o usuário. Tente novamente mais tarde.",
+		            type: "error"
+		        });
+		    });
 		} else {
 			$(".loading").hide();
 			swal({
@@ -184,7 +232,30 @@ controllers.controller('cadastroController', ['$scope', 'helpServices', '$locati
 	};
 }]);
 
-controllers.controller('pendentesController', ['$scope', 'pendentes', 'helpServices', function($scope, pendentes, helpServices){
-	$scope.pendentes = pendentes;
-	console.log($scope.pendentes);
+controllers.controller('pendentesController', ['$scope', '$http', function ($scope, $http) {
+    $scope.pendentes = [];
+    $scope.load = function () {
+        $("#data").hide();
+        $("#empty").hide();
+        $(".loading").show();
+        $http.get("http://helpserver20160512124409.azurewebsites.net/api/account/buscarusuarios").then(function (payload) {
+            var contas = payload.data;
+            contas.forEach(function (element) {
+                if (!element.acessoAprovado) {
+                    $scope.pendentes.push(element);
+                }
+            });
+            console.log($scope.pendentes);
+        });
+        $(".loading").hide();
+        if ($scope.pendentes.length) {
+            $("#data").show();
+            $("#empty").hide();
+        } else {
+            $("#data").hide();
+            $("#empty").show();
+        }
+    }
+	
+    $scope.load();
 }]);

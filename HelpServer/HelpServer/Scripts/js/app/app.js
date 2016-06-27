@@ -34,19 +34,14 @@ app.config(["$routeProvider", function ($routeProvider) {
 	}).when("/contas", {
 	    templateUrl: "Views/Home/views/contas.html",
 		controller: "contasController",
-		title: "Contas",
-   		resolve: {
-			contas: function (helpServices) {
-				return helpServices.getUsers();
-			}
-		}
+		title: "Contas"
 	}).when("/conta/:id", {
 	    templateUrl: "Views/Home/views/conta.html",
 		controller: "contaController",
 		title: "Conta",
     		resolve: {
-			conta: function (helpServices, $route) {
-				return helpServices.getUser($route.current.params.id);
+			    id: function ($route) {
+				    return $route.current.params.id;
 			}
 		}
 	}).when("/cadastro", {
@@ -56,12 +51,7 @@ app.config(["$routeProvider", function ($routeProvider) {
 	}).when("/pendentes", {
 	    templateUrl: "Views/Home/views/pendentes.html",
 		controller: "pendentesController",
-		title: "Cadastros Pendentes",
-		resolve: {
-			pendentes: function (helpServices) {
-				return helpServices.getPendentes();
-			}
-		}
+		title: "Cadastros Pendentes"
 	})
 }]);
 

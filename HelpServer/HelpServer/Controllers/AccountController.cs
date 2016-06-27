@@ -17,6 +17,7 @@ using HelpServer.Models;
 using HelpServer.Providers;
 using HelpServer.Results;
 using System.Linq;
+using System.Web.Http.Cors;
 
 namespace HelpServer.Controllers
 {
@@ -31,6 +32,7 @@ namespace HelpServer.Controllers
         {
         }
 
+        
         public AccountController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
@@ -53,6 +55,7 @@ namespace HelpServer.Controllers
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         // GET api/Account/UserInfo
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
         public UserInfoViewModel GetUserInfo()
@@ -68,6 +71,7 @@ namespace HelpServer.Controllers
         }
 
         // POST api/Account/Logout
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
@@ -76,6 +80,7 @@ namespace HelpServer.Controllers
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
@@ -116,6 +121,7 @@ namespace HelpServer.Controllers
         }
 
         // POST api/Account/ChangePassword
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
@@ -136,6 +142,7 @@ namespace HelpServer.Controllers
         }
 
         // POST api/Account/SetPassword
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
@@ -155,6 +162,7 @@ namespace HelpServer.Controllers
         }
 
         // POST api/Account/AddExternalLogin
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
         {
@@ -193,6 +201,7 @@ namespace HelpServer.Controllers
         }
 
         // POST api/Account/RemoveLogin
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
         {
@@ -222,6 +231,7 @@ namespace HelpServer.Controllers
         }
 
         // GET api/Account/ExternalLogin
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
@@ -279,6 +289,7 @@ namespace HelpServer.Controllers
         }
 
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [AllowAnonymous]
         [Route("ExternalLogins")]
         public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
@@ -320,6 +331,7 @@ namespace HelpServer.Controllers
         }
 
         // POST api/Account/Register
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [AllowAnonymous]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
@@ -342,6 +354,7 @@ namespace HelpServer.Controllers
         }
 
         // POST api/Account/RegisterExternal
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("RegisterExternal")]
@@ -376,6 +389,7 @@ namespace HelpServer.Controllers
 
 
         #region Incluido Manualmente
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [AllowAnonymous]
         [Route("BuscarUsuarios")]
         public ICollection<UsuarioViewModel> GetUsuarios()
@@ -401,6 +415,7 @@ namespace HelpServer.Controllers
             return usuarios;
         }
 
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [AllowAnonymous]
         [Route("AdicionarEmRole")]
         public async Task PutAdicionarUsuarioEmRole(string id,string role)
@@ -411,6 +426,7 @@ namespace HelpServer.Controllers
             }
         }
 
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [AllowAnonymous]
         [Route("RemoverDeRole")]
         public async Task PutRemoverUsuarioDeRole(string id, string role)
@@ -421,6 +437,7 @@ namespace HelpServer.Controllers
             }
         }
 
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [AllowAnonymous]
         [Route("AprovarUsuario")]
         public async Task PatchAprovarUsuario(string id, bool aprovado)

@@ -8,6 +8,7 @@ using HelpServer.Models;
 using HelpServer.Context;
 using System.Data.Entity.Validation;
 using HelpServer.Repositorios;
+using System.Web.Http.Cors;
 
 namespace HelpServer.Controllers
 {
@@ -19,6 +20,7 @@ namespace HelpServer.Controllers
 
 
         // GET: api/Solicitacao
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public IEnumerable <Solicitacao> Get()
         {
             try
@@ -34,6 +36,7 @@ namespace HelpServer.Controllers
         }
 
         // GET: api/Solicitacao/5
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public Solicitacao Get(long id)
         {
             Solicitacao item = repositorio.Get(id);
@@ -45,6 +48,7 @@ namespace HelpServer.Controllers
         }
 
         // POST: api/Solicitacao
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public HttpResponseMessage Post([FromBody]Solicitacao value)
         {
 
@@ -61,9 +65,10 @@ namespace HelpServer.Controllers
 
                 throw;
             }
-            
 
         }
+
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("api/Solicitacao/AlterarStatus/{id}")]
         public HttpResponseMessage PatchAlterarStatusSolicitacao(long id, [FromBody]int status)
         {
@@ -71,6 +76,7 @@ namespace HelpServer.Controllers
            
         }
 
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("api/Solicitacao/AlterarResponsavel/{id}")]
         public HttpResponseMessage PatchAlterarResponsavelSolicitacao(long id, [FromBody]string responsavel)
         {
@@ -80,6 +86,7 @@ namespace HelpServer.Controllers
 
 
         // PUT: api/Solicitacao/5
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public void Put(long id, [FromBody]Solicitacao value)
         {
 
@@ -88,6 +95,7 @@ namespace HelpServer.Controllers
         }
 
         // DELETE: api/Solicitacao/5
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public void Delete(long id)
         {
 

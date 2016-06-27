@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace HelpServer.Controllers
 {
@@ -20,6 +21,7 @@ namespace HelpServer.Controllers
         static readonly IObservacaoRepository repositorio = new ObservacaoRepository();
 
         // GET: api/Observacao
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public IEnumerable<Observacao> Get()
         {
             try
@@ -33,6 +35,7 @@ namespace HelpServer.Controllers
         }
 
         // GET: api/Observacao/5
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public Observacao Get(int id)
         {
             try
@@ -47,6 +50,7 @@ namespace HelpServer.Controllers
         }
 
         // POST: api/Observacao
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public HttpResponseMessage Post([FromBody]Observacao value, int idSolicitacao)
         {
             try
@@ -66,6 +70,7 @@ namespace HelpServer.Controllers
         }
 
         // PUT: api/Observacao/5
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public void Put(int id, [FromBody]Observacao value)
         {
             try
@@ -80,6 +85,7 @@ namespace HelpServer.Controllers
         }
 
         // DELETE: api/Observacao/5
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public void Delete(int id)
         {
             Observacao item = repositorio.Get(id);

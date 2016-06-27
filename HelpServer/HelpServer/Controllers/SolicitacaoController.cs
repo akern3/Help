@@ -64,7 +64,6 @@ namespace HelpServer.Controllers
             
 
         }
-
         [Route("api/Solicitacao/AlterarStatus/{id}")]
         public HttpResponseMessage PatchAlterarStatusSolicitacao(long id, [FromBody]int status)
         {

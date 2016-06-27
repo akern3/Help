@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using HelpServer.Models;
 using HelpServer.Providers;
 using HelpServer.Results;
+using System.Linq;
 
 namespace HelpServer.Controllers
 {
@@ -108,13 +109,6 @@ namespace HelpServer.Controllers
             return new ManageInfoViewModel
             {
                 LocalLoginProvider = LocalLoginProvider,
-
-                #region Incluidos Manualmente
-                nome = user.nome,
-                matricula = user.matricula,
-                roles = user.Roles,
-                #endregion
-
                 Email = user.UserName,
                 Logins = logins,
                 ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
@@ -335,7 +329,7 @@ namespace HelpServer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, matricula = model.matricula, nome = model.nome, ativo = true, acessoAprovado = false };
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, matricula = model.matricula, nome = model.nome, ativo = true, acessoAprovado = false, LockoutEnabled = true, LockoutEndDateUtc = DateTime.MaxValue };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -380,6 +374,70 @@ namespace HelpServer.Controllers
             return Ok();
         }
 
+
+        #region Incluido Manualmente
+        [AllowAnonymous]
+        [Route("BuscarUsuarios")]
+        public ICollection<UsuarioViewModel> GetUsuarios()
+        {
+            ICollection<UsuarioViewModel> usuarios = new List<UsuarioViewModel>();
+            UsuarioViewModel usuario;
+
+            foreach (var item in UserManager.Users)
+            {
+                 usuario = new UsuarioViewModel()
+                {
+                    nome = item.nome,
+                    matricula = item.matricula,
+                    userName = item.UserName,
+                    id = item.Id,
+                    acessoAprovado = item.acessoAprovado,
+                    ativo = item.ativo,
+                    roles = UserManager.GetRoles(item.Id),
+
+                };
+                usuarios.Add(usuario);
+            }
+            return usuarios;
+        }
+
+        [AllowAnonymous]
+        [Route("AdicionarEmRole")]
+        public async Task PutAdicionarUsuarioEmRole(string id,string role)
+        {
+            if (UserManager.FindById(id) != null)
+            {
+                var result = await UserManager.AddToRoleAsync(id, role);
+            }
+        }
+
+        [AllowAnonymous]
+        [Route("RemoverDeRole")]
+        public async Task PutRemoverUsuarioDeRole(string id, string role)
+        {
+            if (UserManager.FindById(id) != null)
+            {
+                var result = await UserManager.RemoveFromRoleAsync(id, role);
+            }
+        }
+
+        [AllowAnonymous]
+        [Route("AprovarUsuario")]
+        public async Task PatchAprovarUsuario(string id, bool aprovado)
+        {
+            if (aprovado)
+            {
+                var result = await UserManager.SetLockoutEnabledAsync(id, !aprovado);
+            }
+            else
+            {
+                var result = await UserManager.SetLockoutEnabledAsync(id, aprovado);
+                UserManager.SetLockoutEndDate(id, DateTime.MaxValue);
+            }
+        }
+
+
+        #endregion
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)

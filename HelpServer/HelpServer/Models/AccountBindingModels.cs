@@ -95,4 +95,19 @@ namespace HelpServer.Models
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+
+
+    #region Incluido Manualmente
+    public class UsuarioViewModel
+    {
+        public string nome { get; set; }
+        public string matricula { get; set; }
+        public string userName { get; set; }
+        public string id { get; set; }
+        public bool acessoAprovado { get; set; }
+        public bool ativo { get; set; }
+        public System.Collections.Generic.IList<string> roles { get; set; }
+
+    } 
+    #endregion
 }

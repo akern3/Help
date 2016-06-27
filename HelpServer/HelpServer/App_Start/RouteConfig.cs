@@ -48,7 +48,7 @@ namespace HelpServer
 
             routes.MapRoute(
                  name: "ReportCatchAllRoute",
-                 url: "report/{*.}",
+                 url: "pendentes/{*.}",
                  defaults: new
                  {
                      controller = "Home",

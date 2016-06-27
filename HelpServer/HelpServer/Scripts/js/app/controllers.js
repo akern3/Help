@@ -2,9 +2,22 @@
 
 var controllers = angular.module('helpApp.controllers', []);
 
-controllers.controller('solicitacoesController', ['$scope', 'solicitacoes', function($scope, solicitacoes){
-	$scope.solicitacoes = solicitacoes;
-	console.log($scope.solicitacoes);
+controllers.controller('solicitacoesController', ['$scope', '$http', '$interval', function ($scope, $http, $interval) {
+    
+    $scope.load = function () {
+        $(".loading").show();
+        $http.get("http://helpserver20160512124409.azurewebsites.net/api/solicitacao").then(function (payload) {
+            $scope.solicitacoes = payload.data;
+            console.log($scope.solicitacoes);
+            $(".loading").hide();
+        });
+    };
+
+    $scope.load();
+
+    $interval(function () {
+        $scope.load();
+    }, 30000)
 }]);
 
 controllers.controller('contasController', ['$scope', 'DTOptionsBuilder', 'DTColumnDefBuilder', 'helpServices', '$timeout', function($scope, DTOptionsBuilder, DTColumnDefBuilder, helpServices, $timeout){

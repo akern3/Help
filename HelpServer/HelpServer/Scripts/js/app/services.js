@@ -2,7 +2,7 @@
 
 var services = angular.module('helpApp.services', []);
 
-services.factory('helpServices', function($rootScope) {
+services.factory('helpServices', function($rootScope, $http) {
 	var solicitacoes = [
 	{
 		id: 1,
@@ -134,7 +134,9 @@ services.factory('helpServices', function($rootScope) {
 
 	return {
 		getSolicitacoes: function () {
-			return solicitacoes;
+		    $http.get("http://helpserver20160512124409.azurewebsites.net/api/solicitacao").then(function (payload) {
+		        return payload;
+		    });
 		},
 		getSolicitacao: function (id) {
 			var ret = null;

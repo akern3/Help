@@ -13,14 +13,21 @@ app.config(["$routeProvider", function ($routeProvider) {
     //moment.tz.add("America/Sao_Paulo|LMT BRT BRST|36.s 30 20|012121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212|-2glwR.w HdKR.w 1cc0 1e10 1bX0 Ezd0 So0 1vA0 Mn0 1BB0 ML0 1BB0 zX0 pTd0 PX0 2ep0 nz0 1C10 zX0 1C10 LX0 1C10 Mn0 H210 Rb0 1tB0 IL0 1Fd0 FX0 1EN0 FX0 1HB0 Lz0 1EN0 Lz0 1C10 IL0 1HB0 Db0 1HB0 On0 1zd0 On0 1zd0 Lz0 1zd0 Rb0 1wN0 Wn0 1tB0 Rb0 1tB0 WL0 1tB0 Rb0 1zd0 On0 1HB0 FX0 1C10 Lz0 1Ip0 HX0 1zd0 On0 1HB0 IL0 1wp0 On0 1C10 Lz0 1C10 On0 1zd0 On0 1zd0 Rb0 1zd0 Lz0 1C10 Lz0 1C10 On0 1zd0 On0 1zd0 On0 1zd0 On0 1C10 Lz0 1C10 Lz0 1C10 On0 1zd0 On0 1zd0 Rb0 1wp0 On0 1C10 Lz0 1C10 On0 1zd0 On0 1zd0 On0 1zd0 On0 1C10 Lz0 1C10 Lz0 1C10 Lz0 1C10 On0 1zd0 Rb0 1wp0 On0 1C10 Lz0 1C10 On0 1zd0");
 
 	$routeProvider.when("/", {
-		templateUrl: "views/prof/solicitacoes.html",
-		controller: "profSolicitacoesController",
-		title: "Solicitações",
-		resolve: {
-			solicitacoes: function (helpServices) {
-				return helpServices.getSolicitacoes();
-			}
-		}
+		templateUrl: "login.html",
+		controller: "loginController",
+		title: "Login"
+	}).when("/login", {
+		templateUrl: "login.html",
+		controller: "loginController",
+		title: "Login"
+	}).when("/logout", {
+		templateUrl: "login.html",
+		controller: "logoutController",
+		title: "Login"
+	}).when("/cadastro", {
+		templateUrl: "views/prof/cadastro.html",
+		controller: "cadastroController",
+		title: "Novo Cadastro"
 	}).when("/prof/solicitacoes", {
 		templateUrl: "views/prof/solicitacoes.html",
 		controller: "profSolicitacoesController",
@@ -37,8 +44,8 @@ app.config(["$routeProvider", function ($routeProvider) {
 		controller: "profSolicitacaoController",
 		title: "Solicitação",
 		resolve: {
-			solicitacao: function (helpServices, $route) {
-				return helpServices.getSolicitacao($route.current.params.id);
+			id: function ($route) {
+				return $route.current.params.id;
 			}
 		}
 	}).when("/prof/new", {
@@ -55,13 +62,80 @@ app.config(["$routeProvider", function ($routeProvider) {
 	})
 }]);
 
-app.run(["$rootScope", "$location", function ($rootScope, $location) {
-	$rootScope.user = {
-		id: 1,
-		nome: "Guilherme",
-		tipo: 1,
-		email: "guilherme@prof.una.br"
-	};
+app.run(["$rootScope", "$location", "$http", function ($rootScope, $location, $http) {
+	$rootScope.user = null;
+	$rootScope.users = [
+		{
+			id: 1,
+			nome: "João Paulo",
+			userName: "joao@prof.una.br",
+			role: "Professor",
+			matricula: "324570",
+			password: "101010"
+		},
+		{
+			id: 2,
+			nome: "Ingrid",
+			userName: "ingrid@prof.una.br",
+			role: "Professor",
+			matricula: "321456",
+			password: "101010"
+		},
+		{
+			id: 3,
+			nome: "Mayara",
+			userName: "mayara@prof.una.br",
+			role: "Professor",
+			matricula: "314590",
+			password: "101010"
+		},
+		{
+			id: 4,
+			nome: "Guilherme",
+			userName: "guilherme@prof.una.br",
+			role: "Professor",
+			matricula: "31417041",
+			password: "101010"
+		}
+	];
+
+	$rootScope.login = function(obj) {
+		$(".loading").show();
+		if ($rootScope.user) {
+			$(".loading").hide();
+			$location.path("/prof/solicitacoes");
+		} else {
+				if (obj.userName !== '' && obj.password !== '') {
+					$rootScope.users.forEach(function(u) {
+						if (u.userName == obj.userName && u.password == obj.password) {
+							$rootScope.user = u;
+						}
+					})
+					if ($rootScope.user) {
+						$(".loading").hide();
+						$location.path("/prof/solicitacoes");
+					} else {
+						$(".loading").hide();
+						swal({
+							title: "Erro!",
+							text: "E-mail ou senha incorretos.",
+							type: "error",
+							showConfirmButton: true
+						});
+					}
+				} else {
+					$(".loading").hide();
+					swal({
+						title: "Erro!",
+						text: "Os campos são obrigatórios.",
+						type: "error",
+						showConfirmButton: true
+					});
+				}
+			}
+	}
+
+	$rootScope.slogan = "Sua solução em poucos cliques.";
 
 	$rootScope.getUser = function () {
 		return $rootScope.user;
@@ -71,8 +145,20 @@ app.run(["$rootScope", "$location", function ($rootScope, $location) {
 		return $rootScope.user.nome;
 	};
 
+	$rootScope.editarUsuario = function (obj) {
+		$rootScope.users.forEach(function(u) {
+			if (u.id == obj.id) {
+				u = obj;
+			}
+		});
+	};
+
 	$rootScope.getStatus = function(id) {
 		switch (id) {
+			case 0:
+			return "Todos";
+			break;
+
 			case 1:
 			return "Em aberto";
 			break;
@@ -160,7 +246,7 @@ app.run(["$rootScope", "$location", function ($rootScope, $location) {
 	}
 
 	$rootScope.formatDate = function (date) {
-		return moment(date * 1000).format("DD/MM/YYYY");
+		return moment(date).format("DD/MM/YYYY - HH:mm");
 	};
 
 	var history = [];

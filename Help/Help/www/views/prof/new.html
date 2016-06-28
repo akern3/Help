@@ -8,115 +8,117 @@
         Nova Solicitação
     </div>
     <div class="conteudo">
-        <form>
             <ul class="nav nav-tabs" role="tablist">
                 <li ng-class="{active: showTab == 'sala'}" ng-click="showTab = 'sala'" style="cursor: pointer;"><a aria-controls="sala" role="tab" data-toggle="tab"><h4>Sala</h4></a></li>
                 <li ng-class="{active: showTab == 'lab'}" ng-click="showTab = 'lab'" style="cursor: pointer;"><a aria-controls="lab" role="tab" data-toggle="tab"><h4>Laboratório</h4></a></li>
             </ul>
             <div class="tab-content">
+              <form name="salaForm" ng-submit="salvar()">
                 <div role="tabpanel" class="tab-pane fade in" ng-class="{active: showTab == 'sala'}" id="sala" ng-show="showTab == 'sala'">
                     <div class="row-fluid">
                         <label>Sala: </label>
-                        <input type="number" ng-model="new.sala.numero" class="form-control" required/>
+                        <input type="number" ng-model="new.sala.sala" class="form-control" required/>
                     </div>
                         <label>Selecione suas solicitações:</label>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.VGA"> Cabo VGA / Adaptador
+                            <input type="checkbox" ng-model="new.sala.problemas.VGA"> Cabo VGA / Adaptador
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.Som"> Caixa de som
+                            <input type="checkbox" ng-model="new.sala.problemas.Som"> Caixa de som
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.Controle"> Controle
+                            <input type="checkbox" ng-model="new.sala.problemas.Controle"> Controle
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.Energia"> Energia
+                            <input type="checkbox" ng-model="new.sala.problemas.Energia"> Energia
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.Internet"> Internet
+                            <input type="checkbox" ng-model="new.sala.problemas.Internet"> Internet
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.Mouse"> Mouse
+                            <input type="checkbox" ng-model="new.sala.problemas.Mouse"> Mouse
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.Notebook"> Notebook
+                            <input type="checkbox" ng-model="new.sala.problemas.Notebook"> Notebook
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.sala.motivo.Projetor"> Projetor
+                            <input type="checkbox" ng-model="new.sala.problemas.Projetor"> Projetor
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label>Nível de urgência:</label>
-                        <select class="form-control" ng-model="new.sala.nivel_urgencia">
-                            <option value="1" ng-selected="new.sala.nivel_urgencia == 1">Baixo</option>
-                            <option value="2" ng-selected="new.sala.nivel_urgencia == 2">Médio</option>
-                            <option value="3" ng-selected="new.sala.nivel_urgencia == 3">Alto</option>
+                        <select class="form-control" ng-model="new.sala.criticidade" required>
+                            <option value="1" ng-selected="new.sala.criticidade == 1">Baixo</option>
+                            <option value="2" ng-selected="new.sala.criticidade == 2">Médio</option>
+                            <option value="3" ng-selected="new.sala.criticidade == 3">Alto</option>
                         </select>
                     </div>
                     <textarea class="form-control" name="observacao" placeholder="Observação (opcional)" ng-model="new.sala.obs.comentario"></textarea>
                     <div class="row-fluid" style="display: inline-block; width: 100%;">
-                        <a class="btn btn-vermelho" style="float: left;" ng-href="#/">Voltar</a>
-                        <button type="submit" class="btn btn-vermelho" style="float: right;" ng-click="salvar()">Help!</button>
+                        <a class="btn btn-vermelho" style="float: left;" ng-href="#/prof/solicitacoes">Voltar</a>
+                        <button type="submit" class="btn btn-vermelho" style="float: right;" ng-disabled="salaForm.$invalid">Help!</button>
                     </div>
                 </div>
+              </form>
+              <form name="labForm" ng-submit="salvar()">
                 <div role="tabpanel" class="tab-pane fade in" ng-class="{active: showTab == 'lab'}" id="lab" ng-show="showTab == 'lab'">
                     <div class="row-fluid">
                         <label>Laboratório: </label>
-                        <input type="number" ng-model="new.lab.numero" class="form-control" />
+                        <input type="number" ng-model="new.lab.sala" class="form-control" required/>
                     </div>
                     <label>Selecione suas solicitações:</label>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.lab.motivo.Som"> Caixa de som
+                            <input type="checkbox" ng-model="new.lab.problemas.Som"> Caixa de som
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.lab.motivo.Energia"> Energia
+                            <input type="checkbox" ng-model="new.lab.problemas.Energia"> Energia
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.lab.motivo.Internet"> Internet
+                            <input type="checkbox" ng-model="new.lab.problemas.Internet"> Internet
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.lab.motivo.Perifericos"> Periféricos (mouse, teclado, etc.)
+                            <input type="checkbox" ng-model="new.lab.problemas.Perifericos"> Periféricos (mouse, teclado, etc.)
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label style="font-weight: normal; margin: 0;">
-                            <input type="checkbox" ng-model="new.lab.motivo.Projetor"> Projetor
+                            <input type="checkbox" ng-model="new.lab.problemas.Projetor"> Projetor
                         </label>
                     </div>
                     <div class="row-fluid">
                         <label>Nível de urgência:</label>
-                        <select class="form-control" ng-model="new.lab.nivel_urgencia">
-                            <option value="1" ng-selected="new.lab.nivel_urgencia == 1">Baixo</option>
-                            <option value="2" ng-selected="new.lab.nivel_urgencia == 2">Médio</option>
-                            <option value="3" ng-selected="new.lab.nivel_urgencia == 3">Alto</option>
+                        <select class="form-control" ng-model="new.lab.criticidade" required>
+                            <option value="1" ng-selected="new.lab.criticidade == 1">Baixo</option>
+                            <option value="2" ng-selected="new.lab.criticidade == 2">Médio</option>
+                            <option value="3" ng-selected="new.lab.criticidade == 3">Alto</option>
                         </select>
                     </div>
                     <textarea class="form-control" name="observacao" placeholder="Observação (opcional)" ng-model="new.lab.obs.comentario"></textarea>
                     <div class="row-fluid" style="display: inline-block; width: 100%;">
-                        <a class="btn btn-vermelho" style="float: left;" ng-href="#/">Voltar</a>
-                        <button class="btn btn-vermelho" style="float: right;" ng-click="salvar()">Help!</button>
+                        <a class="btn btn-vermelho" style="float: left;" ng-href="#/prof/solicitacoes">Voltar</a>
+                        <button class="btn btn-vermelho" style="float: right;" ng-disabled="labForm.$invalid">Help!</button>
                     </div>
                 </div>
             </div>

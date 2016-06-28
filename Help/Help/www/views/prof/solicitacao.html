@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
     <div class="header">
         <div class="header-icon" style="left: 15px;">
-            <a ng-href="#/">
+            <a ng-href="#/prof/solicitacoes">
                 <i class="fa fa-arrow-left"></i>
             </a>
         </div>
@@ -12,22 +12,23 @@
             </a>
         </div>
     </div>
-    <div class="conteudo" ng-show="solicitacao">
+    <div class="conteudo">
+      <div id="dataS">
         <div class="solicitacao" style="background-color: {{getStatusColor(solicitacao.status)}}">
             <span class="item">
-                <label>Nome do usuário: </label> {{getUserName(solicitacao.usuario_id)}}
+                <label>Nome do usuário: </label> {{getUserName()}}
             </span>
             <span class="item">
-                <label>{{solicitacao.local}}: </label> {{solicitacao.numero}}
+                <label>Sala: </label> {{solicitacao.sala}}
             </span>
             <span class="item">
-                <label>Nível de urgência: </label> {{getNivelUrgencia(solicitacao.nivel_urgencia)}}
+                <label>Nível de urgência: </label> {{getNivelUrgencia(solicitacao.criticidade)}}
             </span>
             <span class="item">
                 <label>Data: </label> {{formatDate(solicitacao.data)}}
             </span>
             <span class="item">
-                <label>Motivo: </label> {{solicitacao.motivo.join(", ")}}
+                <label>Motivo(s): </label> {{solicitacao.problemas.join(", ")}}
             </span>
             <span class="item">
                 <label>Status: </label> {{getStatus(solicitacao.status)}}
@@ -40,11 +41,13 @@
             </div>
         </div>
         <div class="row-fluid">
-            <a class="btn btn-vermelho"  ng-href="#/">Voltar</a>
-            <button class="btn btn-vermelho" style="float: right;" ng-click="cancelar(solicitacao)" ng-disabled="solicitacao.status != 1">Cancelar</button>
+            <a class="btn btn-vermelho"  ng-href="#/prof/solicitacoes">Voltar</a>
+            <button class="btn btn-vermelho" style="float: right;" ng-click="cancelar()" ng-show="solicitacao.status == 1">Cancelar</button>
+            <button class="btn btn-vermelho" style="float: right;" ng-click="excluir()" ng-show="solicitacao.status == 3 || solicitacao.status == 4">Excluir</button>
         </div>
-    </div>
-    <div ng-show="!solicitacao">
-        <h4>Solicitação selecionada não disponível</h4>
+      </div>
+      <div id="emptyS">
+          Solicitação selecionada não disponível.
+      </div>
     </div>
 </div>

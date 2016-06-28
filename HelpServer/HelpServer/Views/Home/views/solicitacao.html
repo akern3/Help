@@ -2,7 +2,7 @@
     <div class="conteudo" id="dataS" style="display: none;">
         <div class="solicitacao" style="background-color: {{getStatusColor(solicitacao.status)}}">
             <span class="item">
-                <label>Nome do usuário: </label> {{getUserName(solicitacao.IdSolicitante)}}
+                <label>Nome do usuário: </label> {{solicitacao.IdSolicitante}}
             </span>
             <span class="item">
                 <label>Sala: </label> {{solicitacao.sala}}
@@ -19,8 +19,8 @@
             <span class="item">
                 <label>Status: </label> {{getStatus(solicitacao.status)}}
             </span>
-            <span class="item" ng-show="solicitacao.IdResponsavel !== ''">
-                <label>Responsável: </label> {{getUserName(solicitacao.IdResponsavel)}}
+            <span class="item" ng-show="solicitacao.IdResponsavel">
+                <label>Responsável: </label> {{solicitacao.IdResponsavel}}
             </span>
             <div class="item" ng-show="solicitacao.observacao.length">
                 <label>{{solicitacao.observacao.length == 1 ? 'Observação' : 'Observações'}}</label>

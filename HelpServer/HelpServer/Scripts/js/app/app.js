@@ -191,7 +191,7 @@ app.run(["$rootScope", "$location", "$timeout", "$http", "$interval", function (
 	}
 
 	$rootScope.formatDate = function (date) {
-		return moment(date).format("DD/MM/YYYY");
+	    return moment(date).format("DD/MM/YYYY - HH:mm");
 	};
 
 	$interval(function () {

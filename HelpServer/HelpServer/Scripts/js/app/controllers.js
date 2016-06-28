@@ -218,7 +218,7 @@ controllers.controller('solicitacaoController', ['$scope', 'id', '$location', '$
         $http.get("http://helpserver20160512124409.azurewebsites.net/api/solicitacao/" + id).then(function (payload) {
             $scope.solicitacao = payload.data;
             $(".loading").hide();
-            if ($scope.solicitacao.length) {
+            if ($scope.solicitacao) {
                 $("#dataS").show();
                 $("#emptyS").hide();
             } else {

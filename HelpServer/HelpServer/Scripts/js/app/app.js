@@ -55,11 +55,14 @@ app.config(["$routeProvider", function ($routeProvider) {
 	})
 }]);
 
-app.run(["$rootScope", "$location", "$timeout", function ($rootScope, $location, $timeout) {
+app.run(["$rootScope", "$location", "$timeout", "$http", "$interval", function ($rootScope, $location, $timeout, $http, $interval) {
 	$rootScope.header = "Help!";
 	$rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
       $rootScope.header = current.$$route.title;
-   });
+	});
+
+	$rootScope.countSolicitacoes = 0;
+    $rootScope.countPendentes = 0;
 
 	$rootScope.isActive = function (route, equals) {
         return equals ? $location.path() == route : $location.path().indexOf(route) === 0;
@@ -72,16 +75,35 @@ app.run(["$rootScope", "$location", "$timeout", function ($rootScope, $location,
 		email: "admin@una.br"
 	};
 
+	$rootScope.getUsers = function () {
+	    $rootScope.users = [];
+	    $http.get("http://helpserver20160512124409.azurewebsites.net/api/account/buscarusuarios").then(function (payload) {
+	        $rootScope.users = payload.data;
+	    });
+	};
+
 	$rootScope.getUser = function () {
 		return $rootScope.user;
 	}
 
 	$rootScope.getUserName = function (id) {
-		return $rootScope.user.nome;
+	    if ($rootScope.users.length) {
+	        $rootScope.users.forEach(function (u) {
+	            if (u.id == id) {
+	                return u.name;
+	            }
+	        });
+	    } else {
+	        return "Não disponível";
+	    }
 	};
 
 	$rootScope.getStatus = function(id) {
-		switch (id) {
+	    switch (id) {
+	        case 0:
+	        return "Todos";
+	        break;
+
 			case 1:
 			return "Em aberto";
 			break;
@@ -169,10 +191,12 @@ app.run(["$rootScope", "$location", "$timeout", function ($rootScope, $location,
 	}
 
 	$rootScope.formatDate = function (date) {
-		return moment(date * 1000).format("DD/MM/YYYY");
+		return moment(date).format("DD/MM/YYYY");
 	};
 
-	var history = [];
+	$interval(function () {
+	    $rootScope.getUsers();
+	}, 500000)
 
 	/*$rootScope.$on('$routeChangeStart', function () {
 	    $timeout(function () {

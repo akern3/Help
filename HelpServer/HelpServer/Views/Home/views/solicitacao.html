@@ -1,5 +1,5 @@
 <div class="animated fadeIn">
-    <div class="conteudo" id="data" style="display: none;">
+    <div class="conteudo" id="dataS" style="display: none;">
         <div class="solicitacao" style="background-color: {{getStatusColor(solicitacao.status)}}">
             <span class="item">
                 <label>Nome do usuário: </label> {{getUserName(solicitacao.IdSolicitante)}}
@@ -11,7 +11,7 @@
                 <label>Nível de urgência: </label> {{getNivelUrgencia(solicitacao.criticidade)}}
             </span>
             <span class="item">
-                <label>Data: </label> {{solicitacao.data}}
+                <label>Data: </label> {{$root.formatDate(solicitacao.data)}}
             </span>
             <span class="item">
                 <label>Motivo(s): </label> {{solicitacao.problemas.join(", ")}}
@@ -34,7 +34,7 @@
             <button class="btn btn-vermelho" style="float: right;" ng-click="cancelar(solicitacao)" ng-disabled="solicitacao.status != 1">Cancelar</button>
         </div>
     </div>
-    <div id="empty" style="display: none;">
+    <div id="emptyS" style="display: none;">
         Solicitação não disponível. Tente novamente mais tarde.
     </div>
 </div>

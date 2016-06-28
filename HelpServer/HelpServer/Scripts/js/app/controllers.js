@@ -2,22 +2,63 @@
 
 var controllers = angular.module('helpApp.controllers', []);
 
-controllers.controller('solicitacoesController', ['$scope', '$http', '$interval', function ($scope, $http, $interval) {
-    
+controllers.controller('solicitacoesController', ['$scope', '$http', '$interval', '$rootScope', function ($scope, $http, $interval, $rootScope) {
+    $scope.defaultStatus = 1;
     $scope.load = function () {
+        $rootScope.countSolicitacoes = 0;
+        $scope.solicitacoes = [];
+        $("#dataSol").hide();
+        $("#emptySol").hide();
         $(".loading").show();
         $http.get("http://helpserver20160512124409.azurewebsites.net/api/solicitacao").then(function (payload) {
-            $scope.solicitacoes = payload.data;
-            console.log($scope.solicitacoes);
-            $(".loading").hide();
+            var sols = payload.data;
+            if (sols.length) {
+                if ($scope.defaultStatus == 0) {
+                    $scope.solicitacoes = sols;
+                    $scope.solicitacoes.forEach(function (s) {
+                        if (s.status == 1) {
+                            $rootScope.countSolicitacoes++;
+                        }
+                    });
+                } else {
+                    sols.forEach(function (element) {
+                        if ($scope.defaultStatus == element.status) {
+                            $scope.solicitacoes.push(element);
+                            if ($scope.defaultStatus == 1) {
+                                $rootScope.countSolicitacoes++;
+                            }
+                        }
+                    });
+                }
+
+                if ($scope.solicitacoes.length) {
+                    $(".loading").hide();
+                    $("#dataSol").show();
+                    $("#emptySol").hide();
+                } else {
+                    $(".loading").hide();
+                    $("#dataSol").hide();
+                    $("#emptySol").show();
+                }
+            } else {
+                $(".loading").hide();
+                $("#dataSol").hide();
+                $("#emptySol").show();
+            }
         });
     };
 
     $scope.load();
 
-    $interval(function () {
+    $scope.statusFilter = function (id) {
+        $scope.defaultStatus = id;
         $scope.load();
-    }, 20000)
+    };
+
+    $interval(function () {
+        $rootScope.countSolicitacoes = 0;
+        $scope.load();
+    }, 30000)
 }]);
 
 controllers.controller('contasController', ['$scope', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$timeout', '$http', function($scope, DTOptionsBuilder, DTColumnDefBuilder, $timeout, $http){
@@ -107,6 +148,8 @@ controllers.controller('contasController', ['$scope', 'DTOptionsBuilder', 'DTCol
 controllers.controller('contaController', ['$scope', 'id', '$location', '$http', function($scope, id, $location, $http){
     console.log(id);
     $scope.load = function () {
+        $("#dataC").hide();
+        $("#emptyC").hide();
         $(".loading").show();
         $http.get("http://helpserver20160512124409.azurewebsites.net/api/account/buscarusuarios").then(function (payload) {
             var contas = payload.data;
@@ -114,18 +157,18 @@ controllers.controller('contaController', ['$scope', 'id', '$location', '$http',
                 if (element.id == id) {
                     console.log(element);
                     $scope.conta = element;
-                    $scope.conta.senha = "";
-                    $scope.conta.confirmacao = "";
+                    $scope.conta.Password = "";
+                    $scope.conta.ConfirmPassword = "";
                     console.log($scope.conta);
                 }
             });
             $(".loading").hide();
             if ($scope.conta) {
-                $("#data").show();
-                $("#empty").hide();
+                $("#dataC").show();
+                $("#emptyC").hide();
             } else {
-                $("#data").hide();
-                $("#empty").show();
+                $("#dataC").hide();
+                $("#emptyC").show();
             }
         });
     }
@@ -145,7 +188,7 @@ controllers.controller('contaController', ['$scope', 'id', '$location', '$http',
 
 	$scope.salvar = function () {
 		$(".loading").show();
-		if ($scope.conta.senha === $scope.conta.confirmacao) {
+		if ($scope.conta.Password === $scope.conta.ConfirmPassword) {
 			helpServices.editarusuario($scope.conta);
 			$(".loading").hide();
 			swal({
@@ -169,18 +212,18 @@ controllers.controller('contaController', ['$scope', 'id', '$location', '$http',
 
 controllers.controller('solicitacaoController', ['$scope', 'id', '$location', '$http', function ($scope, id, $location, $http) {
     $scope.load = function () {
-        $("#data").hide();
-        $("#empty").hide();
+        $("#dataS").hide();
+        $("#emptyS").hide();
         $(".loading").show();
         $http.get("http://helpserver20160512124409.azurewebsites.net/api/solicitacao/" + id).then(function (payload) {
             $scope.solicitacao = payload.data;
             $(".loading").hide();
             if ($scope.solicitacao.length) {
-                $("#data").show();
-                $("#empty").hide();
+                $("#dataS").show();
+                $("#emptyS").hide();
             } else {
                 $("#data").hide();
-                $("#empty").show();
+                $("#emptyS").show();
             }
         });
     };
@@ -188,7 +231,7 @@ controllers.controller('solicitacaoController', ['$scope', 'id', '$location', '$
     $scope.load();
 }]);
 
-controllers.controller('cadastroController', ['$scope', '$location', '$http', '$timeout', function($scope, $location, $http, $timeout){
+controllers.controller('cadastroController', ['$scope', '$location', '$http', '$timeout', '$rootScope', function($scope, $location, $http, $timeout, $rootScope){
 	$scope.user = {
 		roles:["Professor"],
 		nome: "",
@@ -211,6 +254,7 @@ controllers.controller('cadastroController', ['$scope', '$location', '$http', '$
 		            timer: 2000
 		        });
 		        $timeout(function () {
+		            $rootScope.getUsers();
 		            $location.path("/contas");
 		        }, 2500);
 		    }).error(function () {
@@ -232,11 +276,12 @@ controllers.controller('cadastroController', ['$scope', '$location', '$http', '$
 	};
 }]);
 
-controllers.controller('pendentesController', ['$scope', '$http', function ($scope, $http) {
-    $scope.pendentes = [];
+controllers.controller('pendentesController', ['$scope', '$http', '$timeout', '$interval', '$rootScope', function ($scope, $http, $timeout, $interval, $rootScope) {
     $scope.load = function () {
-        $("#data").hide();
-        $("#empty").hide();
+        $scope.pendentes = [];
+        $rootScope.countPendentes = 0;
+        $("#dataPend").hide();
+        $("#emptyPend").hide();
         $(".loading").show();
         $http.get("http://helpserver20160512124409.azurewebsites.net/api/account/buscarusuarios").then(function (payload) {
             var contas = payload.data;
@@ -246,16 +291,48 @@ controllers.controller('pendentesController', ['$scope', '$http', function ($sco
                 }
             });
             console.log($scope.pendentes);
+            $(".loading").hide();
+            if ($scope.pendentes.length) {
+                $rootScope.countPendentes = $scope.pendentes.length;
+                $("#dataPend").show();
+                $("#emptyPend").hide();
+            } else {
+                $("#dataPend").hide();
+                $("#emptyPend").show();
+            }
         });
-        $(".loading").hide();
-        if ($scope.pendentes.length) {
-            $("#data").show();
-            $("#empty").hide();
-        } else {
-            $("#data").hide();
-            $("#empty").show();
-        }
     }
 	
     $scope.load();
+
+    $scope.aprovarCadastro = function (id) {
+        if (id) {
+            $(".loading").show();
+            $http.get("http://helpserver20160512124409.azurewebsites.net/api/account/aprovarusuario?id=" + id + "&aprovado=" + true).success(function () {
+                $(".loading").hide();
+                swal({
+                    title: "Sucesso!",
+                    text: "Cadastro aprovado.",
+                    type: "success",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                $timeout(function () {
+                    $scope.load();
+                }, 1750);
+            }).error(function () {
+                $(".loading").hide();
+                swal({
+                    title: "Erro!",
+                    text: "Não foi possível aprovar o cadastro. Tente novamente mais tarde.",
+                    type: "error"
+                });
+            });
+        }
+    }
+
+    $interval(function () {
+        $rootScope.countPendentes = 0;
+        $scope.load();
+    }, 100000)
 }]);

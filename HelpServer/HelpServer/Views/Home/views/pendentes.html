@@ -1,5 +1,5 @@
 <div class="animated fadeIn">
-	<div id="data" style="display: none;">
+	<div id="dataPend" style="display: none;">
 		<div ng-repeat="p in pendentes" class="col-xs-12 col-sm-6 col-md-4">
 			<div class="solicitacao">
 					<span class="item">
@@ -23,14 +23,14 @@
 					<button class="btn btn-vermelho">
 						<i class="fa fa-close" style="margin-right: 4px;"></i> Reprovar
 					</button>
-					<button class="btn btn-verde" style="float: right;">
+					<button class="btn btn-verde" style="float: right;" ng-click="aprovarCadastro(p.id)">
 						<i class="fa fa-check" style="margin-right: 4px;"></i> Aprovar
 					</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div id="empty" style="display: none;">
+	<div id="emptyPend" style="display: none;">
 		<span>
 			Nenhum cadastro pendente no momento.
 		</span>

@@ -42,10 +42,20 @@
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
                     <li ng-class="{active: $root.isActive('/', true) || $root.isActive('/solicitacoes')}">
-                        <a href="#/">Solicitações</a>
+                        <a href="#/">
+                            Solicitações
+                            <span class="badge" style="float: right;" ng-show="$root.countSolicitacoes">
+                                {{$root.countSolicitacoes}}
+                            </span>
+                        </a>
                     </li>
                     <li ng-class="{active: $root.isActive('/pendentes')}">
-                        <a href="#/pendentes">Cadastros Pendentes</a>
+                        <a href="#/pendentes">
+                            Cadastros Pendentes
+                            <span class="badge" style="float: right;" ng-show="$root.countPendentes">
+                                {{$root.countPendentes}}
+                            </span>
+                        </a>
                     </li>
                     <li ng-class="{active: $root.isActive('/contas')}">
                         <a href="#/contas">Gerenciar Contas</a>

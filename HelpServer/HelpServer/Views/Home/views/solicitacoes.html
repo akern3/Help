@@ -1,5 +1,33 @@
 <div class="animated fadeIn">
-    <div ng-show="solicitacoes.length">
+    <div class="form-group" style="display: inline-block; width: 100%;">
+        <label style="margin-right: 5px;">
+            Status
+        </label>
+        <div class="dropdown" style="display: inline-block; width: 150px;">
+            <button class="btn btn-default dropdown-toggle" type="button" id="statusMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                {{$root.getStatus(defaultStatus)}}
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="statusMenu">
+                <li ng-class="{active: defaultStatus == 0}">
+                    <a ng-click="defaultStatus = 0; load();" style="display: block; cursor: pointer;">Todos</a>
+                </li>
+                <li ng-class="{active: defaultStatus == 1}" ng-click="defaultStatus = 1; load();">
+                    <a ng-click="defaultStatus = 1; load();" style="display: block; cursor: pointer;">Em aberto</a>
+                </li>
+                <li ng-class="{active: defaultStatus == 2}" ng-click="defaultStatus = 2; load();">
+                    <a ng-click="defaultStatus = 2; load();" style="display: block; cursor: pointer;">Em análise</a>
+                </li>
+                <li ng-class="{active: defaultStatus == 3}" ng-click="defaultStatus = 3; load();">
+                    <a ng-click="defaultStatus = 3; load();" style="display: block; cursor: pointer;">Encerrada</a>
+                </li>
+                <li ng-class="{active: defaultStatus == 4}" ng-click="defaultStatus = 4; load();">
+                    <a ng-click="defaultStatus = 4; load();" style="display: block; cursor: pointer;">Cancelada</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="dataSol" style="display: none;">
         <div ng-repeat="s in solicitacoes">
             <a ng-href="#/solicitacao/{{s.Id}}" class="col-xs-12 col-sm-6 col-md-4">
                 <div class="solicitacao" style="background-color: {{getStatusColor(s.status)}};">
@@ -13,7 +41,7 @@
                     </span>
                     <span class="item">
                         <label>Data: </label>
-                        {{formatDate(s.data)}}
+                        {{$root.formatDate(s.data)}}
                     </span>
                     <span class="item">
                         <label>Motivo(s): </label>
@@ -27,7 +55,7 @@
             </a>
         </div>
     </div>
-    <div ng-show="!solicitacoes.length">
+    <div id="emptySol" style="display: none;">
         <span>
             Nenhuma solicitação no momento.
         </span>

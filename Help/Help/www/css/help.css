@@ -93,16 +93,16 @@ textarea {
     resize: none !important;
 }
 
-ul li {
+.menu-tabs ul li {
     width: 50%;
     text-align: center;
 }
 
-ul li a {
+.menu-tabs ul li a {
     color: black;
 }
 
-ul li a:hover {
+.menu-tabs ul li a:hover {
     color: black !important;
     text-decoration: none !important;
 }

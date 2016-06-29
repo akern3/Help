@@ -2,18 +2,23 @@
 
 var controllers = angular.module('helpApp.controllers', []);
 
-controllers.controller('loginController', ['$location', '$rootScope', function($location, $rootScope){
+controllers.controller('loginController', ['$location', '$rootScope', '$cookies', function($location, $rootScope, $cookies){
+	$rootScope.user = $cookies.getObject('UserHelp');
 	if ($rootScope.user) {
 		$location.path("/prof/solicitacoes");
 	}
 }]);
 
-controllers.controller('logoutController', ['$location', '$rootScope', function($location, $rootScope){
+controllers.controller('logoutController', ['$location', '$rootScope', '$cookies', function($location, $rootScope, $cookies){
 	$rootScope.user = null;
+	$cookies.remove('UserHelp');
 	$location.path("/login");
 }]);
 
 controllers.controller('profSolicitacoesController', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location){
+	$(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+	});
 	if (!$rootScope.user) {
 		$location.path("/login");
 	} else {
@@ -74,7 +79,16 @@ controllers.controller('profContaController', ['$scope', '$rootScope', '$locatio
 					type: "warning",
 					cancelButtonText: "Não",
 					confirmButtonText: "Sim",
-					showCancelButton: true
+					showCancelButton: true,
+					closeOnConfirm: false
+				}, function() {
+						swal({
+						title: "Sucesso!",
+						text: "Conta desativada.",
+						type: "success",
+						showConfirmButton: false,
+						timer: 2000
+					});
 				});
 		};
 
@@ -141,6 +155,7 @@ controllers.controller('profSolicitacaoController', ['$scope', 'id', '$http', '$
 				$location.path("/prof/solicitacoes");
 			}).error(function() {
 				$(".loading").hide();
+				$scope.solicitacao.status = 1;
 				swal({
 					title: "Erro!",
 					text: "Ocorreu um problema. Tente novamente mais tarde.",

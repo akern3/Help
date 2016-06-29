@@ -4,7 +4,8 @@ var app = angular.module("helpApp", [
 	"ngRoute",
 	"helpApp.controllers",
 	"helpApp.services",
-	"ng-sweet-alert"
+	"ng-sweet-alert",
+	"ngCookies"
 ]);
 
 app.config(["$routeProvider", function ($routeProvider) {
@@ -62,8 +63,12 @@ app.config(["$routeProvider", function ($routeProvider) {
 	})
 }]);
 
-app.run(["$rootScope", "$location", "$http", function ($rootScope, $location, $http) {
+app.run(["$rootScope", "$location", "$http", "$cookies", function ($rootScope, $location, $http, $cookies) {
 	$rootScope.user = null;
+	if ($cookies.getObject('UserHelp')) {
+		$rootScope.user = $cookies.getObject('UserHelp');
+	}
+
 	$rootScope.users = [
 		{
 			id: 1,
@@ -113,6 +118,7 @@ app.run(["$rootScope", "$location", "$http", function ($rootScope, $location, $h
 					})
 					if ($rootScope.user) {
 						$(".loading").hide();
+						$cookies.putObject("UserHelp", $rootScope.user);
 						$location.path("/prof/solicitacoes");
 					} else {
 						$(".loading").hide();

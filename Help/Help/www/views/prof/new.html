@@ -8,10 +8,12 @@
         Nova Solicitação
     </div>
     <div class="conteudo">
-            <ul class="nav nav-tabs" role="tablist">
-                <li ng-class="{active: showTab == 'sala'}" ng-click="showTab = 'sala'" style="cursor: pointer;"><a aria-controls="sala" role="tab" data-toggle="tab"><h4>Sala</h4></a></li>
-                <li ng-class="{active: showTab == 'lab'}" ng-click="showTab = 'lab'" style="cursor: pointer;"><a aria-controls="lab" role="tab" data-toggle="tab"><h4>Laboratório</h4></a></li>
-            </ul>
+            <div class="menu-tabs">
+                <ul class="nav nav-tabs" role="tablist">
+                        <li ng-class="{active: showTab == 'sala'}" ng-click="showTab = 'sala'" style="cursor: pointer;"><a aria-controls="sala" role="tab" data-toggle="tab"><h4>Sala</h4></a></li>
+                        <li ng-class="{active: showTab == 'lab'}" ng-click="showTab = 'lab'" style="cursor: pointer;"><a aria-controls="lab" role="tab" data-toggle="tab"><h4>Laboratório</h4></a></li>
+                    </ul>
+            </div>
             <div class="tab-content">
               <form name="salaForm" ng-submit="salvar()">
                 <div role="tabpanel" class="tab-pane fade in" ng-class="{active: showTab == 'sala'}" id="sala" ng-show="showTab == 'sala'">

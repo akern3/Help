@@ -33,7 +33,7 @@
                 <div class="solicitacao" style="background-color: {{getStatusColor(s.status)}};">
                     <span class="item">
                         <label>Solicitante: </label>
-                        {{s.IdSolicitante}}
+                        {{getUserName(s.IdSolicitante)}}
                     </span>
                     <span class="item">
                         <label>Sala: </label>
@@ -50,6 +50,10 @@
                     <span class="item">
                         <label>Status: </label>
                         {{getStatus(s.status)}}
+                    </span>
+                    <span class="item" ng-show="s.IdResponsavel">
+                        <label>Responsável: </label>
+                        {{getUserName(s.IdResponsavel)}}
                     </span>
                 </div>
             </a>

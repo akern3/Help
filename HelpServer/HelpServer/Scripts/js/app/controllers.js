@@ -58,31 +58,81 @@ controllers.controller('solicitacoesController', ['$scope', '$http', '$interval'
     $interval(function () {
         $rootScope.countSolicitacoes = 0;
         $scope.load();
-    }, 30000)
+    }, 60000)
 }]);
 
-controllers.controller('contasController', ['$scope', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$timeout', '$http', function($scope, DTOptionsBuilder, DTColumnDefBuilder, $timeout, $http){
+controllers.controller('contasController', ['$scope', '$rootScope', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$timeout', '$http', function($scope, $rootScope, DTOptionsBuilder, DTColumnDefBuilder, $timeout, $http){
 	$scope.load = function () {
 	    $(".loading").show();
 	    $http.get("http://helpserver20160512124409.azurewebsites.net/api/account/buscarusuarios").then(function (payload) {
-	        $scope.contas = payload.data;
-            console.log($scope.contas);
+	        $rootScope.users = payload.data;
+	        if ($rootScope.users.length) {
+	            $rootScope.users.forEach(function (user) {
+	                if (!user.roles.length) {
+	                    user.roles = ["Professor"];
+	                }
+	            });
+	        };
 	        $(".loading").hide();
 	    });
 	}
 
 	$scope.load();
 
-	$scope.desativarConta = function () {
+	$scope.alterarStatus = function (u) {
+	    if (u.ativo) {
+	        var slug = "Desativar";
+	    } else {
+	        var slug = "Ativar";
+	    }
 		swal({
-				title: "Desativar Conta",
+				title: slug + " Conta",
 				text: "Você tem certeza?",
 				type: "warning",
 				cancelButtonText: "Não",
 				confirmButtonText: "Sim",
-				showCancelButton: true
+				showCancelButton: true,
+		        closeOnConfirm: false
+	        }, function() {
+	            $rootScope.users.forEach(function (user) {
+	                if (user.id == u.id) {
+	                    user.ativo = !user.ativo;
+	                }
+	            });
+	            swal({
+	                title: "Sucesso!",
+	                text: "Status alterado",
+	                type: "success",
+	                showConfirmButton: false,
+	                timer: 2000
+	            });
 			});
 	}
+
+	$scope.excluir = function (u) {
+	    swal({
+	        title: "Excluir Conta",
+	        text: "Você tem certeza? Esta operação é irreversível.",
+	        type: "warning",
+	        cancelButtonText: "Não",
+	        confirmButtonText: "Sim",
+	        showCancelButton: true,
+	        closeOnConfirm: false
+	    }, function () {
+	        $rootScope.users.forEach(function (user, i) {
+	            if (user.id == u.id) {
+	                delete $rootScope.users[i];
+	            }
+	        });
+	        swal({
+	            title: "Sucesso!",
+	            text: "Usuário removido.",
+	            type: "success",
+	            showConfirmButton: false,
+	            timer: 2000
+	        });
+	    });
+	};
 
 	$scope.dtOptions = DTOptionsBuilder.newOptions()
         .withBootstrap()
@@ -146,7 +196,6 @@ controllers.controller('contasController', ['$scope', 'DTOptionsBuilder', 'DTCol
 }]);
 
 controllers.controller('contaController', ['$scope', 'id', '$location', '$http', function($scope, id, $location, $http){
-    console.log(id);
     $scope.load = function () {
         $("#dataC").hide();
         $("#emptyC").hide();
@@ -155,11 +204,9 @@ controllers.controller('contaController', ['$scope', 'id', '$location', '$http',
             var contas = payload.data;
             contas.forEach(function (element) {
                 if (element.id == id) {
-                    console.log(element);
                     $scope.conta = element;
                     $scope.conta.Password = "";
                     $scope.conta.ConfirmPassword = "";
-                    console.log($scope.conta);
                 }
             });
             $(".loading").hide();
@@ -210,7 +257,7 @@ controllers.controller('contaController', ['$scope', 'id', '$location', '$http',
 	};
 }]);
 
-controllers.controller('solicitacaoController', ['$scope', 'id', '$location', '$http', function ($scope, id, $location, $http) {
+controllers.controller('solicitacaoController', ['$scope', 'id', '$location', '$http', '$rootScope', function ($scope, id, $location, $http, $rootScope) {
     $scope.load = function () {
         $("#dataS").hide();
         $("#emptyS").hide();
@@ -229,6 +276,111 @@ controllers.controller('solicitacaoController', ['$scope', 'id', '$location', '$
     };
 
     $scope.load();
+
+    $scope.delegate = $rootScope.user.id;
+    $scope.done = true;
+
+    $scope.atender = function (id) {
+        $(".loading").show();
+        $scope.solicitacao.IdResponsavel = id;
+        $scope.solicitacao.status = 2;
+        $http.put("http://helpserver20160512124409.azurewebsites.net/api/solicitacao/" + $scope.solicitacao.Id, $scope.solicitacao).success(function () {
+            $(".loading").hide();
+            swal({
+                title: "Sucesso!",
+                text: "Solicitação em análise.",
+                type: "success",
+                showConfirmButton: false,
+                timer: 2000
+            });
+            $location.path("/solicitacoes");
+        }).error(function () {
+            $scope.solicitacao.status = 1;
+            $(".loading").hide();
+            swal({
+                title: "Erro!",
+                text: "Ocorreu um problema. Tente novamente mais tarde.",
+                type: "error"
+            });
+        });
+    }
+
+    $scope.cancelar = function () {
+        $(".loading").show();
+        var previouStatus = $scope.solicitacao.status;
+        $scope.solicitacao.status = 4;
+        $http.put("http://helpserver20160512124409.azurewebsites.net/api/solicitacao/" + $scope.solicitacao.Id, $scope.solicitacao).success(function () {
+            $(".loading").hide();
+            swal({
+                title: "Sucesso!",
+                text: "Solicitação cancelada.",
+                type: "success",
+                showConfirmButton: false,
+                timer: 2000
+            });
+            $location.path("/solicitacoes");
+        }).error(function () {
+            $scope.solicitacao.status = previousStatus;
+            $(".loading").hide();
+            swal({
+                title: "Erro!",
+                text: "Ocorreu um problema. Tente novamente mais tarde.",
+                type: "error"
+            });
+        });
+    }
+
+    $scope.encerrar = function () {
+        $(".loading").show();
+        var previouStatus = $scope.solicitacao.status;
+        if ($scope.done) {
+            var newStatus = 3;
+        } else {
+            var newStatus = 1;
+        }
+        $scope.solicitacao.status = newStatus;
+        $http.put("http://helpserver20160512124409.azurewebsites.net/api/solicitacao/" + $scope.solicitacao.Id, $scope.solicitacao).success(function () {
+            $(".loading").hide();
+            swal({
+                title: "Sucesso!",
+                text: "Solicitação encerrada.",
+                type: "success",
+                showConfirmButton: false,
+                timer: 2000
+            });
+            $location.path("/solicitacoes");
+        }).error(function () {
+            $scope.solicitacao.status = previousStatus;
+            $(".loading").hide();
+            swal({
+                title: "Erro!",
+                text: "Ocorreu um problema. Tente novamente mais tarde.",
+                type: "error"
+            });
+        });
+    }
+
+    $scope.excluir = function () {
+        $(".loading").show();
+        $http.delete("http://helpserver20160512124409.azurewebsites.net/api/solicitacao/" + $scope.solicitacao.Id).success(function () {
+            $(".loading").hide();
+            swal({
+                title: "Sucesso!",
+                text: "Solicitação excluída.",
+                type: "success",
+                showConfirmButton: false,
+                timer: 2000
+            });
+            $location.path("/solicitacoes");
+        }).error(function () {
+            $(".loading").hide();
+            swal({
+                title: "Erro!",
+                text: "Ocorreu um problema. Tente novamente mais tarde.",
+                type: "error"
+            });
+        });
+    }
 }]);
 
 controllers.controller('cadastroController', ['$scope', '$location', '$http', '$timeout', '$rootScope', function($scope, $location, $http, $timeout, $rootScope){
@@ -290,7 +442,6 @@ controllers.controller('pendentesController', ['$scope', '$http', '$timeout', '$
                     $scope.pendentes.push(element);
                 }
             });
-            console.log($scope.pendentes);
             $(".loading").hide();
             if ($scope.pendentes.length) {
                 $rootScope.countPendentes = $scope.pendentes.length;
@@ -308,18 +459,18 @@ controllers.controller('pendentesController', ['$scope', '$http', '$timeout', '$
     $scope.aprovarCadastro = function (id) {
         if (id) {
             $(".loading").show();
-            $http.get("http://helpserver20160512124409.azurewebsites.net/api/account/aprovarusuario?id=" + id + "&aprovado=" + true).success(function () {
+            $http.patch("http://helpserver20160512124409.azurewebsites.net/api/Account/AprovarUsuario?id=" + id + "&aprovado=" + true).success(function () {
                 $(".loading").hide();
                 swal({
                     title: "Sucesso!",
                     text: "Cadastro aprovado.",
                     type: "success",
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1200
                 });
                 $timeout(function () {
                     $scope.load();
-                }, 1750);
+                }, 1500);
             }).error(function () {
                 $(".loading").hide();
                 swal({

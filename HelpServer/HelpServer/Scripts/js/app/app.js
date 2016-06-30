@@ -52,10 +52,10 @@ app.config(["$routeProvider", function ($routeProvider) {
 	    templateUrl: "Views/Home/views/pendentes.html",
 		controller: "pendentesController",
 		title: "Cadastros Pendentes"
-	})
+	}).otherwise({ redirectTo: '/' });
 }]);
 
-app.run(["$rootScope", "$location", "$timeout", "$http", "$interval", function ($rootScope, $location, $timeout, $http, $interval) {
+app.run(["$rootScope", "$location", "$timeout", "$http", function ($rootScope, $location, $timeout, $http) {
 	$rootScope.header = "Help!";
 	$rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
       $rootScope.header = current.$$route.title;
@@ -69,30 +69,49 @@ app.run(["$rootScope", "$location", "$timeout", "$http", "$interval", function (
     };
 
 	$rootScope.user = {
-		id: 2,
+		id: 100,
 		nome: "Admin",
-		tipo: 3,
-		email: "admin@una.br"
+        ativo: true,
+        Password: "admin",
+		roles: ["Administrador"],
+		email: "admin@una.br",
+        matricula: 202020
 	};
 
 	$rootScope.getUsers = function () {
 	    $rootScope.users = [];
 	    $http.get("http://helpserver20160512124409.azurewebsites.net/api/account/buscarusuarios").then(function (payload) {
 	        $rootScope.users = payload.data;
+	        if ($rootScope.users.length) {
+	            $rootScope.users.forEach(function (user) {
+	                if (!user.roles.length) {
+	                    user.roles = ["Professor"];
+	                }
+	            });
+	        };
+	        $rootScope.users.push($rootScope.user);
 	    });
 	};
+
+	$rootScope.getUsers();
 
 	$rootScope.getUser = function () {
 		return $rootScope.user;
 	}
 
 	$rootScope.getUserName = function (id) {
+	    var name = null;
 	    if ($rootScope.users.length) {
 	        $rootScope.users.forEach(function (u) {
 	            if (u.id == id) {
-	                return u.name;
+	                name = u.name;
 	            }
 	        });
+	        if (name) {
+	            return name;
+	        } else {
+	            return "Não disponível";
+	        }
 	    } else {
 	        return "Não disponível";
 	    }
@@ -193,20 +212,4 @@ app.run(["$rootScope", "$location", "$timeout", "$http", "$interval", function (
 	$rootScope.formatDate = function (date) {
 	    return moment(date).format("DD/MM/YYYY - HH:mm");
 	};
-
-	$interval(function () {
-	    $rootScope.getUsers();
-	}, 500000)
-
-	/*$rootScope.$on('$routeChangeStart', function () {
-	    $timeout(function () {
-	        $(".loading").show();
-	    }, 300);
-	});
-
-    $rootScope.$on('$routeChangeSuccess', function() {
-        $timeout(function () {
-            $(".loading").hide();
-        }, 300);
-    });*/
 }]);

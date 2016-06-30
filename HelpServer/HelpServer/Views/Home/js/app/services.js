@@ -73,65 +73,6 @@ services.factory('helpServices', function($rootScope) {
 		}]
 	}];
 
-	var users = [
-		{
-			id: 1,
-			status: 1,
-			name: "Guilherme",
-			email: "guilherme@prof.una.br",
-			matricula: 11111,
-			tipo: 1
-		},
-		{
-			id: 2,
-			status: 1,
-			name: "Admin",
-			email: "admin@una.br",
-			matricula: 22222,
-			tipo: 3
-		},
-		{
-			id: 3,
-			status: 1,
-			name: "João",
-			email: "joao@una.br",
-			matricula: 33333,
-			tipo: 2
-		},
-		{
-			id: 4,
-			status: 2,
-			name: "Maria",
-			email: "maria@prof.una.br",
-			matricula: 444444,
-			tipo: 1
-		},
-		{
-			id: 5,
-			status: 1,
-			name: "Fulano",
-			email: "fulano@una.br",
-			matricula: 555555,
-			tipo: 2
-		},
-		{
-			id: 6,
-			status: 0,
-			name: "João Sem Braço",
-			email: "joao@hotmail.com",
-			matricula: 66123123,
-			tipo: 1
-		},
-		{
-			id: 7,
-			status: 0,
-			name: "Will Smith",
-			email: "willsmith@prof.una.br",
-			matricula: 9090990,
-			tipo: 1
-		}
-	];
-
 	return {
 		getSolicitacoes: function () {
 			return solicitacoes;
@@ -155,43 +96,6 @@ services.factory('helpServices', function($rootScope) {
 				}
 			}) ;
 			return hasChanged;
-		},
-		getUsers: function () {
-			 return users.filter(function (u) {
-			 	return u.status !== 0;
-			 });
-		},
-		getUser: function (id) {
-			var ret = null;
-			users.forEach(function(s) {
-				if (s.id == id) {
-					ret = s;
-				}
-			});
-			return ret;
-		},
-		novoUsuario: function (obj) {
-			var id = users.length + 1;
-			obj.id = id;
-			users.unshift(obj);
-		},
-		editarusuario: function (obj) {
-			var ret = null;
-			users.forEach(function(s) {
-				if (s.id == obj.id) {
-					s = obj;
-				}
-			});
-			if (ret) {
-				return true;
-			} else {
-				return false;
-			}
-		},
-		getPendentes: function () {
-			return users.filter(function (u) {
-				return u.status === 0;
-			});
 		}
 	}
 });

@@ -4,8 +4,6 @@ var app = angular.module("helpApp", [
 	"ngRoute",
 	"helpApp.controllers",
 	"helpApp.services",
-	"datatables",
-  "datatables.bootstrap",
 	"ng-sweet-alert"
 ]);
 
@@ -33,7 +31,7 @@ app.config(["$routeProvider", function ($routeProvider) {
 			}
 		}
 	}).when("/solicitacao/:id", {
-		templateUrl: "views/solicitacao.html",
+		templateUrl: "views/prof/solicitacao.html",
 		controller: "solicitacaoController",
 		title: "Solicitação",
 		resolve: {
@@ -45,8 +43,8 @@ app.config(["$routeProvider", function ($routeProvider) {
 		templateUrl: "views/contas.html",
 		controller: "contasController",
 		title: "Contas",
-   		resolve: {
-			contas: function (helpServices) {
+    resolve: {
+			contas: function (helpServices, $route) {
 				return helpServices.getUsers();
 			}
 		}
@@ -54,36 +52,16 @@ app.config(["$routeProvider", function ($routeProvider) {
 		templateUrl: "views/conta.html",
 		controller: "contaController",
 		title: "Conta",
-    		resolve: {
+    resolve: {
 			conta: function (helpServices, $route) {
 				return helpServices.getUser($route.current.params.id);
-			}
-		}
-	}).when("/cadastro", {
-		templateUrl: "views/cadastro.html",
-		controller: "cadastroController",
-		title: "Novo Usuário"
-	}).when("/pendentes", {
-		templateUrl: "views/pendentes.html",
-		controller: "pendentesController",
-		title: "Cadastros Pendentes",
-		resolve: {
-			pendentes: function (helpServices) {
-				return helpServices.getPendentes();
 			}
 		}
 	})
 }]);
 
 app.run(["$rootScope", "$location", function ($rootScope, $location) {
-	$rootScope.header = "Help!";
-	$rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-      $rootScope.header = current.$$route.title;
-   });
-
-	$rootScope.pathIsActive = function (route, equals) {
-        return equals ? $location.path() == route : $location.path().indexOf(route) === 0;
-    };
+  $rootScope.header = "";
 
 	$rootScope.user = {
 		id: 2,

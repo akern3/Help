@@ -60,7 +60,7 @@ app.config(["$routeProvider", function ($routeProvider) {
 	}).when("/prof/sobre", {
 	    templateUrl: "views/prof/sobre.html",
 	    title: "Sobre"
-	})
+	}).otherwise({ redirectTo: '/' });
 }]);
 
 app.run(["$rootScope", "$location", "$http", "$cookies", function ($rootScope, $location, $http, $cookies) {

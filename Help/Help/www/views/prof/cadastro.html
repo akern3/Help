@@ -8,24 +8,30 @@
         Novo Cadastro
     </div>
     <div class="conteudo">
-      <form name="cadastroForm" ng-submit="cadastrar()">
+      <form name="cadastroForm" ng-submit="salvar()">
         <div class="solicitacao">
             <span class="item" style="margin-bottom: 10px;">
               <label>Cargo *</label>
                   <select class="form-control" ng-model="user.roles" required>
                       <option value="Professor" ng-selected="user.roles == 'Professor'">Professor</option>
                       <option value="Tecnico" ng-selected="user.roles == 'Tecnico'">Técnico</option>
-                      <option value="Administrador" ng-selected="user.roles == 'Administrador'">Administrador</option>
                   </select>
             </span>
             <span class="item" style="margin-bottom: 10px;">
                 <label>Nome do usuário: </label> <input type="text" class="form-control" ng-model="user.nome" required>
             </span>
             <span class="item" style="margin-bottom: 10px;">
-                <label>E-mail: </label> <input type="text" class="form-control" ng-model="user.userName" required>
+              <label>E-mail: </label>
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="user.Email" required aria-describedby="basic-addon2">
+                <span class="input-group-addon" id="basic-addon2">{{user.roles == 'Professor' ? '@prof.una.br' : '@una.br'}}</span>
+              </div>
             </span>
             <span class="item" style="margin-bottom: 10px;">
-                <label>Nova senha: </label> <input type="password" class="form-control" ng-model="user.Password" required>
+                <label>Matrícula: </label> <input type="text" class="form-control" ng-model="user.matricula" required>
+            </span>
+            <span class="item" style="margin-bottom: 10px;">
+                <label>Senha: <span style="font-size: 11px;">(Deve possuir ao menos um número, um caractere especial e uma letra maíuscula)</span> </label> <input type="password" class="form-control" ng-model="user.Password" required>
             </span>
             <span class="item" style="margin-bottom: 10px;">
                 <label>Confirme sua senha: </label> <input type="password" class="form-control" ng-model="user.ConfirmPassword" required>

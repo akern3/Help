@@ -141,52 +141,51 @@ controllers.controller('profSolicitacaoController', ['$scope', 'id', '$http', '$
     $scope.load();
 
 		$scope.cancelar = function () {
-			$(".loading").show();
-			$scope.solicitacao.status = 4;
-			$http.put("http://helpserver20160512124409.azurewebsites.net/api/solicitacao/" + $scope.solicitacao.Id).success(function() {
-				$(".loading").hide();
-				swal({
-					title: "Sucesso!",
-					text: "Solicitação cancelada.",
-					type: "success",
-					showConfirmButton: false,
-					timer: 2000
-				});
-				$location.path("/prof/solicitacoes");
-			}).error(function() {
-				$(".loading").hide();
-				$scope.solicitacao.status = 1;
-				swal({
-					title: "Erro!",
-					text: "Ocorreu um problema. Tente novamente mais tarde.",
-					type: "error",
-					showConfirmButton: true
-				});
-			});
-		}
+        $(".loading").show();
+        var previouStatus = $scope.solicitacao.status;
+        $scope.solicitacao.status = 4;
+        $http.put("http://helpserver20160512124409.azurewebsites.net/api/solicitacao/" + $scope.solicitacao.Id, $scope.solicitacao).success(function () {
+            $(".loading").hide();
+            swal({
+                title: "Sucesso!",
+                text: "Solicitação cancelada.",
+                type: "success",
+                showConfirmButton: false,
+                timer: 2000
+            });
+            $location.path("/prof/solicitacoes");
+        }).error(function () {
+            $scope.solicitacao.status = previousStatus;
+            $(".loading").hide();
+            swal({
+                title: "Erro!",
+                text: "Ocorreu um problema. Tente novamente mais tarde.",
+                type: "error"
+            });
+        });
+    }
 
 		$scope.excluir = function () {
-			$(".loading").show();
-			$http.delete("http://helpserver20160512124409.azurewebsites.net/api/solicitacao/" + $scope.solicitacao.Id).success(function() {
-				$(".loading").hide();
-				swal({
-					title: "Sucesso!",
-					text: "Solicitação excluída.",
-					type: "success",
-					showConfirmButton: false,
-					timer: 2000
-				});
-				$location.path("/prof/solicitacoes");
-			}).error(function() {
-				$(".loading").hide();
-				swal({
-					title: "Erro!",
-					text: "Ocorreu um problema. Tente novamente mais tarde.",
-					type: "error",
-					showConfirmButton: true
-				});
-			});
-		}
+        $(".loading").show();
+        $http.delete("http://helpserver20160512124409.azurewebsites.net/api/solicitacao/" + $scope.solicitacao.Id).success(function () {
+            $(".loading").hide();
+            swal({
+                title: "Sucesso!",
+                text: "Solicitação excluída.",
+                type: "success",
+                showConfirmButton: false,
+                timer: 2000
+            });
+            $location.path("/prof/solicitacoes");
+        }).error(function () {
+            $(".loading").hide();
+            swal({
+                title: "Erro!",
+                text: "Ocorreu um problema. Tente novamente mais tarde.",
+                type: "error"
+            });
+        });
+    }
 	}
 }]);
 
@@ -209,9 +208,7 @@ controllers.controller('novaSolicitacaoController', ['$scope', '$http', '$locati
 						Projetor: false
 					},
 					criticidade: 1,
-					obs: {
-						comentario: ""
-					}
+					observacao: ""
 				},
 				lab: {
 					sala: '',
@@ -223,9 +220,7 @@ controllers.controller('novaSolicitacaoController', ['$scope', '$http', '$locati
 						Projetor: false
 					},
 					criticidade: 1,
-					obs: {
-						comentario: ""
-					}
+					observacao: ""
 				}
 			};
 		};
@@ -320,7 +315,14 @@ controllers.controller('cadastroController', ['$scope', '$location', '$http', '$
 	$scope.salvar = function () {
 		$(".loading").show();
 		if ($scope.user.Password === $scope.user.ConfirmPassword) {
-		    $http.post("http://helpserver20160512124409.azurewebsites.net/api/account/register", $scope.user).success(function () {
+			if ($scope.user.roles == "Professor") {
+				$scope.user.Email += "@prof.una.br";
+			} else {
+				$scope.user.Email += "@una.br";
+			}
+			var role = $scope.user.roles;
+			$scope.user.roles = [role];
+		  $http.post("http://helpserver20160512124409.azurewebsites.net/api/account/register", $scope.user).success(function () {
 		        $(".loading").hide();
 		        swal({
 		            title: "Sucesso!",
@@ -331,7 +333,7 @@ controllers.controller('cadastroController', ['$scope', '$location', '$http', '$
 		        });
 		        $timeout(function () {
 		            $location.path("/login");
-		        }, 2500);
+		        }, 3250);
 		    }).error(function () {
 		        $(".loading").hide();
 		        swal({

@@ -417,6 +417,30 @@ namespace HelpServer.Controllers
 
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [AllowAnonymous]
+        [Route("BuscarUsuarioPorID")]
+        public UsuarioViewModel GetUsuario(string id)
+        {
+            UsuarioViewModel usuario;
+
+            var item = UserManager.FindById(id);
+
+            usuario = new UsuarioViewModel()
+            {
+                nome = item.nome,
+                matricula = item.matricula,
+                userName = item.UserName,
+                id = item.Id,
+                acessoAprovado = item.acessoAprovado,
+                ativo = item.ativo,
+                roles = UserManager.GetRoles(item.Id),
+
+            };
+
+            return usuario;
+        }
+
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [AllowAnonymous]
         [Route("AdicionarEmRole")]
         public async Task PutAdicionarUsuarioEmRole(string id,string role)
         {

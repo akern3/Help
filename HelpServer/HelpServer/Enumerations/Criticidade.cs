@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace HelpServer.Models
+namespace HelpServer.Enumerations
 {
     public enum Criticidade : int
     {

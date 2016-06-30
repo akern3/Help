@@ -21,7 +21,7 @@ namespace HelpServer.Controllers
 
         // GET: api/Solicitacao
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public IEnumerable <Solicitacao> Get()
+        public IEnumerable<Solicitacao> Get()
         {
             try
             {
@@ -72,15 +72,15 @@ namespace HelpServer.Controllers
         [Route("api/Solicitacao/AlterarStatus/{id}")]
         public HttpResponseMessage PatchAlterarStatusSolicitacao(long id, [FromBody]int status)
         {
-           return repositorio.UpdateStatus(id, status)? Request.CreateResponse<int>(HttpStatusCode.OK, status) : Request.CreateResponse<int>(HttpStatusCode.BadRequest, status);
-           
+            return repositorio.UpdateStatus(id, status) ? Request.CreateResponse<int>(HttpStatusCode.OK, status) : Request.CreateResponse<int>(HttpStatusCode.BadRequest, status);
+
         }
 
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("api/Solicitacao/AlterarResponsavel/{id}")]
         public HttpResponseMessage PatchAlterarResponsavelSolicitacao(long id, [FromBody]string responsavel)
         {
-            return repositorio.AlterarResponsavel(id, responsavel)? Request.CreateResponse<string>(HttpStatusCode.OK, responsavel) : Request.CreateResponse<string>(HttpStatusCode.BadRequest, responsavel);
+            return repositorio.AlterarResponsavel(id, responsavel) ? Request.CreateResponse<string>(HttpStatusCode.OK, responsavel) : Request.CreateResponse<string>(HttpStatusCode.BadRequest, responsavel);
 
         }
 
@@ -90,7 +90,7 @@ namespace HelpServer.Controllers
         public void Put(long id, [FromBody]Solicitacao value)
         {
 
-            repositorio.Update(id,value);
+            repositorio.Update(id, value);
 
         }
 
@@ -101,11 +101,60 @@ namespace HelpServer.Controllers
 
             Solicitacao item = repositorio.Get(id);
             if (item == null)
-            {                                                                                                                     
+            {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
             repositorio.Remove(item);
+        }
+
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public EstatisticasSolicitacoes GetEstatisticas()
+        {
+            try
+            {
+                EstatisticasSolicitacoes estatisticas = new EstatisticasSolicitacoes();
+                {
+                    estatisticas.CriticidadeAlta = repositorio.GetAll().Where(x => x.criticidade == Enumerations.Criticidade.Alta).Count();
+                    estatisticas.CriticidadeMedia = repositorio.GetAll().Where(x => x.criticidade == Enumerations.Criticidade.Media).Count();
+                    estatisticas.CriticidadeBaixa = repositorio.GetAll().Where(x => x.criticidade == Enumerations.Criticidade.Baixa).Count();
+                    estatisticas.StatusEmAberto = repositorio.GetAll().Where(x => x.status == Enumerations.Status.EmAberto).Count();
+                    estatisticas.StatusEmAnalise = repositorio.GetAll().Where(x => x.status == Enumerations.Status.EmAnalise).Count();
+                    estatisticas.StatusEncerrado = repositorio.GetAll().Where(x => x.status == Enumerations.Status.Encerrada).Count();
+                    estatisticas.SolicitacoesSetorLaboratorio = repositorio.GetAll().Where(x => x.setor == Enumerations.Setor.Laboratorio).Count();
+                    estatisticas.SolicitacosSetorSalaDeAula = repositorio.GetAll().Where(x => x.setor == Enumerations.Setor.SalaDeAula).Count();
+                }
+                return estatisticas;
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+        }
+
+
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public EstatisticasSolicitacoes GetEstatisticasPorResponsavel(string idResponsavel)
+        {
+            try
+            {
+                EstatisticasSolicitacoes estatisticas = new EstatisticasSolicitacoes();
+                {
+                    estatisticas.CriticidadeAlta = repositorio.GetAll().Where(x => (x.criticidade == Enumerations.Criticidade.Alta) && (x.IdResponsavel == idResponsavel)).Count();
+                    estatisticas.CriticidadeMedia = repositorio.GetAll().Where(x => (x.criticidade == Enumerations.Criticidade.Media) && (x.IdResponsavel == idResponsavel)).Count();
+                    estatisticas.CriticidadeBaixa = repositorio.GetAll().Where(x => (x.criticidade == Enumerations.Criticidade.Baixa) && (x.IdResponsavel == idResponsavel)).Count();
+                    estatisticas.StatusEmAberto = repositorio.GetAll().Where(x => (x.status == Enumerations.Status.EmAberto) && (x.IdResponsavel == idResponsavel)).Count();
+                    estatisticas.StatusEmAnalise = repositorio.GetAll().Where(x => (x.status == Enumerations.Status.EmAnalise) && (x.IdResponsavel == idResponsavel)).Count();
+                    estatisticas.StatusEncerrado = repositorio.GetAll().Where(x => (x.status == Enumerations.Status.Encerrada) && (x.IdResponsavel == idResponsavel)).Count();
+                    estatisticas.SolicitacoesSetorLaboratorio = repositorio.GetAll().Where(x => (x.setor == Enumerations.Setor.Laboratorio) && (x.IdResponsavel == idResponsavel)).Count();
+                    estatisticas.SolicitacosSetorSalaDeAula = repositorio.GetAll().Where(x => (x.setor == Enumerations.Setor.SalaDeAula) && (x.IdResponsavel == idResponsavel)).Count();
+                }
+                return estatisticas;
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
         }
     }
 }

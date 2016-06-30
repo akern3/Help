@@ -109,5 +109,17 @@ namespace HelpServer.Models
         public System.Collections.Generic.IList<string> roles { get; set; }
 
     } 
+
+    public class EstatisticasSolicitacoes
+    {
+        public int CriticidadeAlta { get; set; }
+        public int CriticidadeMedia { get; set; }
+        public int CriticidadeBaixa { get; set; }
+        public int StatusEmAberto { get; set; }
+        public int StatusEmAnalise { get; set; }
+        public int StatusEncerrado { get; set; }
+        public int SolicitacoesSetorLaboratorio { get; set; }
+        public int SolicitacosSetorSalaDeAula { get; set; }
+    }
     #endregion
 }

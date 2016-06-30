@@ -2,6 +2,7 @@
 using HelpServer.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -61,6 +62,8 @@ namespace HelpServer.Repositorios
             {
                 throw new ArgumentNullException("item");
             }
+
+            //db.Entry(item).State = EntityState.Modified;
             Solicitacao sol = db.solicitacoes.Find(id);
 
             sol.data = item.data;

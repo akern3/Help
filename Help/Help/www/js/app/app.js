@@ -71,31 +71,31 @@ app.run(["$rootScope", "$location", "$http", "$cookies", function ($rootScope, $
 
 	$rootScope.users = [
 		{
-			id: 1,
+			id: "80ada41a-adbb-4588-9e4e-68ba3ce62a7f",
 			nome: "João Paulo",
-			userName: "joao@prof.una.br",
+			userName: "joaopaulod@gmail.com",
 			role: "Professor",
 			matricula: "324570",
-			password: "101010"
+			password: "Teste@123"
 		},
 		{
-			id: 2,
-			nome: "Ingrid",
+			id: "354a0dca-dc8a-4c81-9074-daa502045a4e",
+			nome: "Ingrid Beatriz",
 			userName: "ingrid@prof.una.br",
 			role: "Professor",
 			matricula: "321456",
 			password: "101010"
 		},
 		{
-			id: 3,
-			nome: "Mayara",
+			id: "c803da77-96f8-4e6c-a027-7056de12dfcc",
+			nome: "Mayara Ferreira",
 			userName: "mayara@prof.una.br",
 			role: "Professor",
 			matricula: "314590",
 			password: "101010"
 		},
 		{
-			id: 4,
+			id: "fb82f728-83c9-42e8-ac1a-5c2053c99244",
 			nome: "Guilherme",
 			userName: "guilherme@prof.una.br",
 			role: "Professor",

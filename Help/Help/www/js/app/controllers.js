@@ -235,6 +235,8 @@ controllers.controller('novaSolicitacaoController', ['$scope', '$http', '$locati
 				$scope.new.sala.IdSolicitante = $rootScope.user.id;
 				$scope.new.sala.status = 1;
 				$scope.new.sala.setor = 1;
+				var obsSala = $scope.new.sala.observacao;
+				$scope.new.sala.observacao = [obsSala];
 				var problemas = [];
 				for (var prop in $scope.new.sala.problemas) {
 					if (!$scope.new.sala.problemas[prop]) {
@@ -244,30 +246,42 @@ controllers.controller('novaSolicitacaoController', ['$scope', '$http', '$locati
 					}
 				}
 				delete $scope.new.sala.problemas;
-				$scope.new.sala.problemas = problemas;
-				$http.post("http://helpserver20160512124409.azurewebsites.net/api/solicitacao", $scope.new.sala).success(function() {
-					$(".loading").hide();
-					swal({
-						title: "Sucesso!",
-						text: "Sua solicitação foi enviada.",
-						type: "success",
-						showConfirmButton: false,
-						timer: 2000
+				if (problemas.length) {
+					$scope.new.sala.problemas = problemas;
+					$http.post("http://helpserver20160512124409.azurewebsites.net/api/solicitacao", $scope.new.sala).success(function() {
+						$(".loading").hide();
+						swal({
+							title: "Sucesso!",
+							text: "Sua solicitação foi enviada.",
+							type: "success",
+							showConfirmButton: false,
+							timer: 2000
+						});
+						$location.path("/prof/solicitacoes");
+					}).error(function() {
+						$(".loading").hide();
+						swal({
+							title: "Erro!",
+							text: "Ocorreu um problema. Tente novamente mais tarde.",
+							type: "error",
+							showConfirmButton: true
+						});
 					});
-					$location.path("/prof/solicitacoes");
-				}).error(function() {
+				} else {
 					$(".loading").hide();
 					swal({
 						title: "Erro!",
-						text: "Ocorreu um problema. Tente novamente mais tarde.",
+						text: "Selecione ao menos um motivo para a solicitação.",
 						type: "error",
 						showConfirmButton: true
 					});
-				});
+				}
 			} else {
 				$scope.new.lab.IdSolicitante = $rootScope.user.id;
 				$scope.new.lab.status = 1;
 				$scope.new.lab.setor = 2;
+				var obsLab = $scope.new.lab.observacao;
+				$scope.new.lab.observacao = [obsLab];
 				var problemas = [];
 				for (var prop in $scope.new.lab.problemas) {
 					if (!$scope.new.lab.problemas[prop]) {
@@ -277,26 +291,36 @@ controllers.controller('novaSolicitacaoController', ['$scope', '$http', '$locati
 					}
 				}
 				delete $scope.new.lab.problemas;
-				$scope.new.lab.problemas = problemas;
-				$http.post("http://helpserver20160512124409.azurewebsites.net/api/solicitacao", $scope.new.lab).success(function() {
-					$(".loading").hide();
-					swal({
-						title: "Sucesso!",
-						text: "Sua solicitação foi enviada.",
-						type: "success",
-						showConfirmButton: false,
-						timer: 2000
+				if (problemas.length) {
+					$scope.new.lab.problemas = problemas;
+					$http.post("http://helpserver20160512124409.azurewebsites.net/api/solicitacao", $scope.new.lab).success(function() {
+						$(".loading").hide();
+						swal({
+							title: "Sucesso!",
+							text: "Sua solicitação foi enviada.",
+							type: "success",
+							showConfirmButton: false,
+							timer: 2000
+						});
+						$location.path("/prof/solicitacoes");
+					}).error(function() {
+						$(".loading").hide();
+						swal({
+							title: "Erro!",
+							text: "Ocorreu um problema. Tente novamente mais tarde.",
+							type: "error",
+							showConfirmButton: true
+						});
 					});
-					$location.path("/prof/solicitacoes");
-				}).error(function() {
+				} else {
 					$(".loading").hide();
 					swal({
 						title: "Erro!",
-						text: "Ocorreu um problema. Tente novamente mais tarde.",
+						text: "Selecione ao menos um motivo para a solicitação.",
 						type: "error",
 						showConfirmButton: true
 					});
-				});
+				}
 			}
 		};
 	}

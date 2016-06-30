@@ -10,7 +10,7 @@
 						<label>Email: </label>
 						{{p.userName}}
 					</span>
-					<span class="item">
+					<span class="item" ng-show="p.roles.length">
 						<label>Cargo: </label>
 						{{p.roles.join(', ')}}
 					</span>

@@ -65,21 +65,33 @@ controllers.controller('contasController', ['$scope', '$rootScope', 'DTOptionsBu
 	$scope.load = function () {
 	    $(".loading").show();
 	    $http.get("http://helpserver20160512124409.azurewebsites.net/api/account/buscarusuarios").then(function (payload) {
-	        $rootScope.users = payload.data;
-	        if ($rootScope.users.length) {
-	            $rootScope.users.forEach(function (user) {
+	        $scope.contas = payload.data;
+	        if ($scope.contas.length) {
+	            $scope.contas.forEach(function (user) {
 	                if (!user.roles.length) {
 	                    user.roles = ["Professor"];
 	                }
 	            });
 	        };
+	        $scope.contas.push($rootScope.user);
+	        $scope.contas.push($rootScope.tecnico);
+	        $scope.contas.push($rootScope.tecnico2);
+	        $rootScope.users = angular.copy($scope.contas);
 	        $(".loading").hide();
 	    });
 	}
 
 	$scope.load();
 
-	$scope.alterarStatus = function (u) {
+	$scope.alterarStatus = function (c_id) {
+	    var u = {
+	        ativo: false
+	    };
+	    $scope.contas.forEach(function (user, i) {
+	        if (user.id == c_id) {
+	            u = user;
+	        }
+	    });
 	    if (u.ativo) {
 	        var slug = "Desativar";
 	    } else {
@@ -94,11 +106,12 @@ controllers.controller('contasController', ['$scope', '$rootScope', 'DTOptionsBu
 				showCancelButton: true,
 		        closeOnConfirm: false
 	        }, function() {
-	            $rootScope.users.forEach(function (user) {
-	                if (user.id == u.id) {
-	                    user.ativo = !user.ativo;
+	            $scope.contas.forEach(function (user, i) {
+	                if (user.id == c_id) {
+	                    $scope.contas[i].ativo = !$scope.contas[i].ativo;
 	                }
 	            });
+	            $rootScope.users = angular.copy($scope.contas);
 	            swal({
 	                title: "Sucesso!",
 	                text: "Status alterado",
@@ -109,7 +122,7 @@ controllers.controller('contasController', ['$scope', '$rootScope', 'DTOptionsBu
 			});
 	}
 
-	$scope.excluir = function (u) {
+	$scope.excluir = function (c_id) {
 	    swal({
 	        title: "Excluir Conta",
 	        text: "Você tem certeza? Esta operação é irreversível.",
@@ -119,11 +132,12 @@ controllers.controller('contasController', ['$scope', '$rootScope', 'DTOptionsBu
 	        showCancelButton: true,
 	        closeOnConfirm: false
 	    }, function () {
-	        $rootScope.users.forEach(function (user, i) {
-	            if (user.id == u.id) {
-	                delete $rootScope.users[i];
+	        $scope.contas.forEach(function (user, i) {
+	            if (user.id == c_id) {
+	                delete $scope.contas[i];
 	            }
 	        });
+	        $rootScope.users = angular.copy($scope.contas);
 	        swal({
 	            title: "Sucesso!",
 	            text: "Usuário removido.",

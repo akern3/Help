@@ -13,7 +13,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="c in users">
+        <tr ng-repeat="c in contas">
             <td style="color: {{c.ativo ? 'green' : 'red'}}">
                 {{c.ativo ? 'Ativo' : 'Inativo'}}
             </td>
@@ -31,11 +31,11 @@
             </td>
             <td style="text-align: left;">
                 <i class="fa fa-{{c.ativo ? 'close' : 'check'}}" rel="tooltip" data-toggle="tooltip" title="{{c.ativo? 'Desativar' : 'Ativar'}}" 
-                   ng-click="alterarStatus(c)" style="cursor: pointer; margin-right: 4px;"></i>
+                   ng-click="alterarStatus(c.id)" style="cursor: pointer; margin-right: 4px;"></i>
                 <a ng-href="#/conta/{{c.id}}" data-toggle="tooltip" rel="tooltip" title="Editar" style="color: #333; text-decoration: none; margin-right: 4px;">
                     <i class="fa fa-pencil"></i>
                 </a>
-                <i class="fa fa-trash" rel="tooltip" data-toggle="tooltip" title="Excluir" ng-click="excluir(c)" style="cursor: pointer;"></i>
+                <i class="fa fa-trash" rel="tooltip" data-toggle="tooltip" title="Excluir" ng-click="excluir(c.id)" style="cursor: pointer;"></i>
             </td>
         </tr>
         </tbody>

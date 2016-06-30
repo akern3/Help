@@ -23,10 +23,7 @@
                 <label>Responsável: </label> {{getUserName(s.IdResponsavel)}}
             </span>
             <div class="item" ng-show="solicitacao.observacao.length">
-                <label>{{solicitacao.observacao.length == 1 ? 'Observação' : 'Observações'}}</label>
-                <div ng-repeat="o in solicitacao.observacao">
-                    <textarea class="form-control" readonly v>{{o}}</textarea>
-                </div>
+                <textarea class="form-control" readonly>{{solicitacao.observacao}}</textarea>
             </div>
         </div>
         <div class="row-fluid" style="margin-bottom: 15px;">
@@ -46,11 +43,11 @@
         <div class="row-fluid" ng-show="showDelegate">
             <div class="dropdown" style="display: inline-block; width: 100%;">
                 <button class="btn btn-default dropdown-toggle" type="button" id="delegateMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: auto;">
-                    {{$root.getUserName(delegate)}}
+                    Selecione
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="delegateMenu" style="width: auto;">
-                    <li ng-repeat="u in users" ng-class="{active: u.id == delegate}">
+                    <li ng-repeat="u in equipe" ng-class="{active: u.id == delegate}">
                         <a ng-click="delegate = u.id; atender(delegate);" style="display: block; cursor: pointer;">{{u.nome}}</a>
                     </li>
                 </ul>

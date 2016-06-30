@@ -75,8 +75,33 @@ app.run(["$rootScope", "$location", "$timeout", "$http", function ($rootScope, $
         Password: "admin",
 		roles: ["Administrador"],
 		email: "admin@una.br",
+		userName: "admin@una.br",
         matricula: 202020
 	};
+
+	$rootScope.tecnico = {
+	    id: 150,
+	    nome: "Tecnico 1",
+	    ativo: true,
+	    Password: "tec",
+	    roles: ["Técnico"],
+	    email: "tecnico1@una.br",
+	    userName: "tecnico1@una.br",
+	    matricula: 121212
+	}
+
+	$rootScope.tecnico2 = {
+	    id: 150,
+	    nome: "Tecnico 2",
+	    ativo: true,
+	    Password: "tec",
+	    roles: ["Técnico"],
+	    email: "tecnico2@una.br",
+	    userName: "tecnico2@una.br",
+	    matricula: 131313
+	}
+
+	$rootScope.equipe = [$rootScope.user, $rootScope.tecnico, $rootScope.tecnico2];
 
 	$rootScope.getUsers = function () {
 	    $rootScope.users = [];
@@ -90,6 +115,8 @@ app.run(["$rootScope", "$location", "$timeout", "$http", function ($rootScope, $
 	            });
 	        };
 	        $rootScope.users.push($rootScope.user);
+	        $rootScope.users.push($rootScope.tecnico);
+	        $rootScope.users.push($rootScope.tecnico2);
 	    });
 	};
 
@@ -104,7 +131,7 @@ app.run(["$rootScope", "$location", "$timeout", "$http", function ($rootScope, $
 	    if ($rootScope.users.length) {
 	        $rootScope.users.forEach(function (u) {
 	            if (u.id == id) {
-	                name = u.name;
+	                name = u.nome;
 	            }
 	        });
 	        if (name) {

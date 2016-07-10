@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using HelpServer.Models;
 using HelpServer.Context;
+using System.Data.Entity;
 
 namespace HelpServer.Repositorios
 {
-    public class ObservacaoRepository : IObservacaoRepository
+    public class ObservacaoRepository : IHelpRepository<Observacao>
     {
 
-        HelpContext db;
+        private HelpContext db;
         public ObservacaoRepository()
         {
             this.db = new HelpContext();
@@ -49,15 +50,13 @@ namespace HelpServer.Repositorios
         }
 
 
-        public bool Update(long id, Observacao item)
+        public bool Update(Observacao item)
         {
             if (item == null)
             {
                 throw new ArgumentNullException("item");
             }
-            Observacao sol = db.observacao.Find(id);
-
-            sol.Texto = item.Texto;
+            db.Entry(item).State = EntityState.Modified;
             db.SaveChanges();
             return true;
         }

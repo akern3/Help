@@ -8,7 +8,7 @@ using System.Web;
 
 namespace HelpServer.Repositorios
 {
-    public class SolicitacaoRepository : ISolicitacaoRepository
+    public class SolicitacaoRepository : IHelpRepository<Solicitacao>
     {
 
         //private List<Solicitacao> db = new List<Solicitacao>();
@@ -56,23 +56,14 @@ namespace HelpServer.Repositorios
             db.SaveChanges();
         }
 
-        public bool Update(long id, Solicitacao item)
+        public bool Update(Solicitacao item)
         {
             if (item == null)
             {
                 throw new ArgumentNullException("item");
             }
 
-            //db.Entry(item).State = EntityState.Modified;
-            Solicitacao sol = db.solicitacoes.Find(id);
-
-            sol.data = item.data;
-            sol.criticidade = item.criticidade;
-            sol.problemas = item.problemas;
-            sol.sala = item.sala;
-            sol.setor = item.setor;
-            sol.status = item.status;
-
+            db.Entry(item).State = EntityState.Modified;
             db.SaveChanges();
             return true;
         }

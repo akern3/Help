@@ -285,8 +285,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Enumerations\Criticidade.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Repositorios\IObservacaoRepository.cs" />
-    <Compile Include="Repositorios\ISolicitacaoRepository.cs" />
+    <Compile Include="Repositorios\IHelpRepository.cs" />
     <Compile Include="Models\Observacao.cs" />
     <Compile Include="Models\Solicitacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

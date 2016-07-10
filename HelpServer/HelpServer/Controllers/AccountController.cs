@@ -388,7 +388,8 @@ namespace HelpServer.Controllers
         }
 
 
-        #region Incluido Manualmente
+        #region Incluido para o aplicativo HELP
+
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [AllowAnonymous]
         [Route("BuscarUsuarios")]
@@ -468,7 +469,7 @@ namespace HelpServer.Controllers
         {
             if (aprovado)
             {
-                var result = await UserManager.SetLockoutEnabledAsync(id, !aprovado);
+                var result = await UserManager.SetLockoutEnabledAsync(id, false);
                 UserManager.SetLockoutEndDate(id, DateTimeOffset.MinValue);
                 var usuario = UserManager.FindById(id);
                 usuario.acessoAprovado = aprovado;
@@ -476,7 +477,7 @@ namespace HelpServer.Controllers
             }
             else
             {
-                var result = await UserManager.SetLockoutEnabledAsync(id, aprovado);
+                var result = await UserManager.SetLockoutEnabledAsync(id, true);
                 UserManager.SetLockoutEndDate(id, DateTime.MaxValue);
                 var usuario = UserManager.FindById(id);
                 usuario.acessoAprovado = aprovado;
@@ -485,6 +486,7 @@ namespace HelpServer.Controllers
         }
 
         #endregion
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)

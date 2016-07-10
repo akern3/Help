@@ -14,11 +14,7 @@ namespace HelpServer.Controllers
     public class ObservacaoController : ApiController
     {
 
-        HelpContext db = new HelpContext();
-
-
-        IEnumerable<Observacao> observacoes = new List<Observacao>();
-        static readonly IObservacaoRepository repositorio = new ObservacaoRepository();
+        static readonly ObservacaoRepository repositorio = new ObservacaoRepository();
 
         // GET: api/Observacao
         [EnableCors(origins: "*", headers: "*", methods: "*")]
@@ -71,11 +67,11 @@ namespace HelpServer.Controllers
 
         // PUT: api/Observacao/5
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public void Put(int id, [FromBody]Observacao value)
+        public void Put([FromBody]Observacao value)
         {
             try
             {
-                repositorio.Update(id, value);
+                repositorio.Update(value);
             }
             catch (Exception ex)
             {

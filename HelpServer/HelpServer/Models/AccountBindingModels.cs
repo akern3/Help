@@ -97,7 +97,7 @@ namespace HelpServer.Models
     }
 
 
-    #region Incluido Manualmente
+    #region Incluido para o aplicativo HELP
     public class UsuarioViewModel
     {
         public string nome { get; set; }

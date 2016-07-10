@@ -16,7 +16,7 @@ namespace HelpServer.Controllers
     {
 
 
-        static readonly ISolicitacaoRepository repositorio = new SolicitacaoRepository();
+        static readonly SolicitacaoRepository repositorio = new SolicitacaoRepository();
 
 
         // GET: api/Solicitacao
@@ -87,10 +87,10 @@ namespace HelpServer.Controllers
 
         // PUT: api/Solicitacao/5
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public void Put(long id, [FromBody]Solicitacao value)
+        public void Put([FromBody]Solicitacao value)
         {
 
-            repositorio.Update(id, value);
+            repositorio.Update(value);
 
         }
 
